@@ -1,3 +1,3 @@
 class AppImages {
-  static const String imagePlaceholder = 'assets/images/placeholder.png';
+  static const String imageNkve = 'assets/images/image_nkve.png';
 }
