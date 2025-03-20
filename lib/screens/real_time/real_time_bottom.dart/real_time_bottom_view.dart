@@ -1,4 +1,5 @@
 import 'package:fidefund/models/milestone_model.dart';
+import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_bubble_transactions.dart';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_milestone_card.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class RealTimeBottomView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Title and "View All" button
             Padding(
               padding: const EdgeInsets.only(bottom: 8),
               child: Row(
@@ -52,7 +52,8 @@ class RealTimeBottomView extends StatelessWidget {
               ),
             ),
 
-            RealTimeTransactionsCard(),
+            // RealTimeTransactionsCard(),
+            TransactionBubbleList(),
 
             SizedBox(height: 12),
 
@@ -80,7 +81,7 @@ class RealTimeBottomView extends StatelessWidget {
               ),
             ),
 
-            // RealTimeMilestoneCard(),
+            RealTimeMilestoneCard(),
           ],
         ),
       ),
