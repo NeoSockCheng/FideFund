@@ -1,4 +1,5 @@
 import 'package:fidefund/screens/main_screen.dart';
+import 'package:fidefund/screens/splash/splash_screen.dart';
 import 'package:fidefund/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'FideFund',
       theme: AppTheme.theme,
-      home: const Main(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
