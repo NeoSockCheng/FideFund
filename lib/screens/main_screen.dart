@@ -48,7 +48,7 @@ class _MainState extends State<Main> {
   }
 
   bool _shouldShowAppBar() {
-    return _currentIndex > 0 && _currentIndex < 5;
+    return _currentIndex > 0 && _currentIndex < 4;
   }
 }
 
