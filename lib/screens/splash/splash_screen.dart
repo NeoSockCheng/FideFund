@@ -1,3 +1,4 @@
+import 'package:fidefund/screens/auth/login_screen.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/screens/main_screen.dart';
@@ -23,13 +24,13 @@ class _SplashScreenState extends State<SplashScreen>
     });
   }
 
-  // Function to navigate to the Main Page with a Fade Animation
+  // Function to navigate to the Login Page with a Fade Animation
   void _fadeToLoginPage() {
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         pageBuilder:
             (context, animation, secondaryAnimation) =>
-                const Main(), // Target page
+                const LoginPage(), // Target page
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(
             opacity: animation, // Apply fade effect
@@ -52,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F6E3),
+      backgroundColor: AppColors.milkyWhite,
       body: Container(
         width: double.infinity,
         child: Column(
