@@ -1,3 +1,15 @@
+class ImpactReportModel {
+  final String title;
+  final String description;
+  final bool isCompleted;
+
+  ImpactReportModel({
+    required this.title,
+    required this.description,
+    required this.isCompleted,
+  });
+}
+
 class ImpactReport {
   final String id;
   final String name;
@@ -9,6 +21,7 @@ class ImpactReport {
   final double goalAmount;
   final String image;
   final DateTime date;
+  final List<ImpactReportModel> milestones; 
 
   ImpactReport({
     required this.id,
@@ -21,5 +34,6 @@ class ImpactReport {
     required this.goalAmount,
     required this.image,
     required this.date,
+    required this.milestones,
   });
 }
