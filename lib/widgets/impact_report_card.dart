@@ -1,9 +1,9 @@
+import 'package:fidefund/models/milestone_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/models/impact_report_model.dart';
 
 class ImpactReportCard extends StatelessWidget {
-  final ImpactReport report;
+  final Milestone report;
 
   const ImpactReportCard({Key? key, required this.report}) : super(key: key);
 
@@ -19,7 +19,7 @@ class ImpactReportCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-            child: Image.asset(report.image, height: 100, width: double.infinity, fit: BoxFit.cover),
+            child: Image.asset(report.coverImage, height: 100, width: double.infinity, fit: BoxFit.cover),
           ),
           Padding(
             padding: EdgeInsets.all(10),
@@ -27,7 +27,7 @@ class ImpactReportCard extends StatelessWidget {
               children: [
                 Text(report.name, textAlign: TextAlign.center, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
-                Text("${report.date.day}/${report.date.month}/${report.date.year}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
+                Text("${report.createdAt.day}/${report.createdAt.month}/${report.createdAt.year}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
                 SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {},

@@ -1,11 +1,11 @@
-import 'package:fidefund/models/organization_model.dart';
+import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:flutter/material.dart';
 
-class ProjectCard extends StatelessWidget {
-  final Organization organization;
+class CampaignCard extends StatelessWidget {
+  final Campaign campaign;
 
-  const ProjectCard({Key? key, required this.organization}) : super(key: key);
+  const CampaignCard({Key? key, required this.campaign}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ProjectCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Donate for ${organization.name}",
+                      "Donate for ${campaign.title}",
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.normal,
@@ -44,7 +44,7 @@ class ProjectCard extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.only(top: 4),
                           child: Text(
-                            "${organization.id}",
+                            "${campaign.title}",
                             style: const TextStyle(
                               fontSize: 14,
                               color: AppColors.darkBlue,
@@ -54,7 +54,7 @@ class ProjectCard extends StatelessWidget {
                         const Spacer(),
                         Chip(
                           label: Text(
-                            organization.category,
+                            campaign.category,
                             style: const TextStyle(
                               fontSize: 14,
                               color: AppColors.darkBlue,
@@ -75,7 +75,7 @@ class ProjectCard extends StatelessWidget {
 
                     const SizedBox(height: 8),
                     Text(
-                      organization.description,
+                      campaign.description,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(fontSize: 10, color: Colors.grey[700]),
@@ -83,7 +83,7 @@ class ProjectCard extends StatelessWidget {
                     const SizedBox(height: 8),
 
                     Text(
-                      "MYR ${organization.fundsRaised.toStringAsFixed(2)}",
+                      "MYR ${campaign.raisedAmount.toStringAsFixed(2)}",
                       style: const TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -101,7 +101,8 @@ class ProjectCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text: "${organization.contributors}", // Contributors (Bold)
+                            text:
+                                "${campaign.donorCount}", // Contributors (Bold)
                             style: const TextStyle(
                               fontWeight: FontWeight.bold, // Make it bold
                               color: AppColors.grey, // Keep the same color
@@ -118,11 +119,11 @@ class ProjectCard extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: LinearProgressIndicator(
-                        value: organization.progress,
+                        value: campaign.raisedAmount/ campaign.targetAmount,
                         minHeight: 8,
                         backgroundColor: Colors.grey[200],
                         valueColor: AlwaysStoppedAnimation<Color>(
-                          organization.progress >= 1.0
+                          (campaign.raisedAmount/ campaign.targetAmount) >= 1.0
                               ? AppColors.primaryBlue
                               : AppColors.secondaryBlue,
                         ),
@@ -131,7 +132,7 @@ class ProjectCard extends StatelessWidget {
                     const SizedBox(height: 6),
 
                     Text(
-                      "Goal: MYR ${organization.goalAmount.toStringAsFixed(2)}",
+                      "Goal: MYR ${campaign.targetAmount.toStringAsFixed(2)}",
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -149,7 +150,7 @@ class ProjectCard extends StatelessWidget {
                 bottomRight: Radius.circular(12),
               ),
               child: Image.asset(
-                organization.image,
+                campaign.coverImage,
                 width: 100,
                 height: 250,
                 fit: BoxFit.cover,

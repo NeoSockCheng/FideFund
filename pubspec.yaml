@@ -74,9 +74,10 @@ flutter:
     - assets/icons/
     - assets/icons/currency/
     - assets/images/
-    - assets/images/impact_reports/
-    - assets/images/real_time/
+    - assets/images/milestone/
+    - assets/images/campaigns/
     - assets/images/user_profile/
+    - assets/images/charity_profile/
 
   fonts:
     - family: OpenSans
