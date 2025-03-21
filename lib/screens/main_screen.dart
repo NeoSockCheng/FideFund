@@ -2,6 +2,7 @@ import 'package:fidefund/screens/donate/donate_screen.dart';
 import 'package:fidefund/screens/home/home_screen.dart';
 import 'package:fidefund/screens/milestone/milestone_screen.dart';
 import 'package:fidefund/screens/profile/profile_screen.dart';
+import 'package:fidefund/screens/real_time/real_time_top/real_time_line_chart.dart';
 import 'package:fidefund/screens/real_time/real_time_screen.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/theme/spacing.dart';

@@ -10,7 +10,7 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 260,
+      height: 270,
       child: Card(
         color: AppColors.white,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),

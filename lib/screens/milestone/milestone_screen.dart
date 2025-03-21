@@ -22,7 +22,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 120,
       fundsRaised: 5000,
       goalAmount: 10000,
-      image: "../assets/images/impact_reports/straydogs.png",
+      image: "assets/images/impact_reports/straydogs.png",
       date: DateTime(2025, 3, 14),
     ),
     ImpactReport(
@@ -34,7 +34,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 200,
       fundsRaised: 8000,
       goalAmount: 15000,
-      image: "../assets/images/impact_reports/gadgets.png",
+      image: "assets/images/impact_reports/gadgets.png",
       date: DateTime(2025, 3, 10),
     ),
     ImpactReport(
@@ -46,7 +46,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 300,
       fundsRaised: 12000,
       goalAmount: 20000,
-      image: "../assets/images/impact_reports/flood.png",
+      image: "assets/images/impact_reports/flood.png",
       date: DateTime(2025, 2, 7),
     ),
     ImpactReport(
@@ -58,7 +58,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 150,
       fundsRaised: 6000,
       goalAmount: 12000,
-      image: "../assets/images/impact_reports/trees.png",
+      image: "assets/images/impact_reports/trees.png",
       date: DateTime(2025, 1, 25),
     ),
     ImpactReport(
@@ -70,7 +70,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 180,
       fundsRaised: 7000,
       goalAmount: 13000,
-      image: "../assets/images/impact_reports/orphanage.png",
+      image: "assets/images/impact_reports/orphanage.png",
       date: DateTime(2025, 3, 5),
     ),
     ImpactReport(
@@ -82,7 +82,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 220,
       fundsRaised: 9500,
       goalAmount: 15000,
-      image: "../assets/images/impact_reports/medical.png",
+      image: "assets/images/impact_reports/medical.png",
       date: DateTime(2025, 2, 28),
     ),
     ImpactReport(
@@ -94,7 +94,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 250,
       fundsRaised: 11000,
       goalAmount: 18000,
-      image: "../assets/images/impact_reports/water.png",
+      image: "assets/images/impact_reports/water.png",
       date: DateTime(2025, 2, 15),
     ),
     ImpactReport(
@@ -106,7 +106,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 280,
       fundsRaised: 13000,
       goalAmount: 20000,
-      image: "../assets/images/impact_reports/homeless.png",
+      image: "assets/images/impact_reports/homeless.png",
       date: DateTime(2025, 1, 30),
     ),
     ImpactReport(
@@ -118,7 +118,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 320,
       fundsRaised: 15000,
       goalAmount: 25000,
-      image: "../assets/images/impact_reports/scholarship.png",
+      image: "assets/images/impact_reports/scholarship.png",
       date: DateTime(2025, 1, 20),
     ),
     ImpactReport(
@@ -130,7 +130,7 @@ class _MilestonePageState extends State<MilestonePage> {
       contributors: 350,
       fundsRaised: 16000,
       goalAmount: 30000,
-      image: "../assets/images/impact_reports/rebuild.png",
+      image: "assets/images/impact_reports/rebuild.png",
       date: DateTime(2025, 3, 2),
     ),
   ];
