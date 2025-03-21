@@ -1,28 +1,33 @@
-import 'package:fidefund/models/currency_model.dart';
-import 'package:fidefund/models/transaction_model.dart';
+import 'package:fidefund/controllers/currency_controller.dart';
+import 'package:fidefund/controllers/donor_controller.dart';
+import 'package:fidefund/models/donation_model.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/utils/app_images.dart';
 import 'package:fidefund/utils/blockchain_helper.dart';
 import 'package:fidefund/widgets/circle_avatar.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
 
-class TransactionItem extends StatelessWidget {
-  final Transaction transaction;
-  final Color backgroundColor; 
+class RecentDonationBubble extends StatelessWidget {
+  final Donation donation;
+  final Color backgroundColor;
 
-  const TransactionItem({
+  const RecentDonationBubble({
     Key? key,
-    required this.transaction,
+    required this.donation,
     this.backgroundColor = AppColors.secondaryBlue,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final currency = Currency.fromString(transaction.cryptoUsed);
+    final currency = CurrencyController.getCurrencyBySymbol(
+      donation.currency.toUpperCase(),
+    );
+    final donorProfile = DonorController.getDonorImage(donation.donorId);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: backgroundColor, 
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -32,20 +37,19 @@ class TransactionItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               /// Donor Avatar, Name, and Description
-               Row(
+              Row(
                 children: [
                   CustomCircularAvatar(
                     radius: 15,
-                    imagePath: transaction.userPhoto,
+                    imagePath: donorProfile ?? AppImages.image_placeholder,
                   ),
                   const SizedBox(width: 8),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        transaction.donorId,
+                        DonorController.getDonorUsername(donation.donorId),
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -53,10 +57,13 @@ class TransactionItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4, 
+                        width: MediaQuery.of(context).size.width * 0.4,
                         child: Text(
-                          transaction.description,
-                          style: const TextStyle(fontSize: 12, color: Colors.grey),
+                          donation.note ?? "",
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -73,7 +80,7 @@ class TransactionItem extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        "${transaction.transactionValue} ${transaction.cryptoUsed.toUpperCase()}",
+                        "${donation.amount} ${donation.currency}",
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
@@ -81,7 +88,7 @@ class TransactionItem extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Image.asset(
-                        currency.image,
+                        currency?.icon ?? AppImages.image_placeholder,
                         width: 15,
                         height: 15,
                       ),
@@ -89,7 +96,7 @@ class TransactionItem extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    "(~MYR ${transaction.valueInMyr})",
+                    "(~MYR ${donation.myrRate})",
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
                   ),
                   CustomTextButton(
@@ -108,9 +115,7 @@ class TransactionItem extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              
-            ],
+            children: [],
           ),
         ],
       ),

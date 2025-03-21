@@ -6,7 +6,7 @@ class AppIcons {
   static const String iconProfile = 'assets/icons/icon_profile.png';
   
   // currency
-  static const String imageBTC = "assets/icons/currency/icon_btc.png";
-  static const String imageETH = "assets/icons/currency/icon_eth.png";
-  static const String imageUSDC = "assets/icons/currency/icon_usdc.png";
+  static const String iconBTC = "assets/icons/currency/icon_btc.png";
+  static const String iconETH = "assets/icons/currency/icon_eth.png";
+  static const String iconUSDC = "assets/icons/currency/icon_usdc.png";
 }

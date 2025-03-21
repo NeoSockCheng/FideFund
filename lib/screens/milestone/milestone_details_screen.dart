@@ -1,14 +1,15 @@
+import 'package:fidefund/models/campaign_model.dart';
+import 'package:fidefund/models/milestone_model.dart';
 import 'package:flutter/material.dart';
-import 'package:fidefund/models/impact_report_model.dart';
 import 'package:fidefund/theme/colors.dart';
 
 class MilestoneDetailsPage extends StatelessWidget {
-  final ImpactReport report;
+  final Campaign report;
 
   const MilestoneDetailsPage({Key? key, required this.report}) : super(key: key);
 
   int get currentMilestoneIndex {
-    return report.milestones.indexWhere((milestone) => !milestone.isCompleted);
+    return report.milestones.indexWhere((milestone) => !milestone.isComplete);
   }
 
   @override
@@ -34,7 +35,7 @@ class MilestoneDetailsPage extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    report.name,
+                    report.title,
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -54,7 +55,7 @@ class MilestoneDetailsPage extends StatelessWidget {
             ),            
             SizedBox(height: 4),
             Text("KNWT Charity Organisation", style: TextStyle(fontSize: 15, color: Colors.grey[700], fontWeight: FontWeight.w500)),
-            Text("${report.date.day} March ${report.date.year}", style: TextStyle(fontSize: 12, color: Colors.grey[500], fontWeight: FontWeight.w500)),
+            Text("${report.createdAt.day} March ${report.createdAt.year}", style: TextStyle(fontSize: 12, color: Colors.grey[500], fontWeight: FontWeight.w500)),
             SizedBox(height: 8),
 
             SizedBox(height: 16),
@@ -97,7 +98,7 @@ class MilestoneDetailsPage extends StatelessWidget {
                   ),
                   SizedBox(height: 6),
                   Text(
-                    "MYR ${report.fundsRaised.toStringAsFixed(0)}",
+                    "MYR ${report.raisedAmount.toStringAsFixed(0)}",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppColors.darkBlue),
                   ),
                 ],
@@ -134,9 +135,9 @@ class MilestoneDetailsPage extends StatelessWidget {
             SizedBox(height: 8),
             Row(
               children: [
-                _buildImageCard(report.image),
-                _buildImageCard(report.image),
-                _buildImageCard(report.image),
+                _buildImageCard(report.coverImage),
+                _buildImageCard(report.coverImage),
+                _buildImageCard(report.coverImage),
               ],
             ),
 
@@ -156,10 +157,10 @@ class MilestoneDetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "MYR ${report.fundsRaised.toStringAsFixed(0)}",
+                        "MYR ${report.raisedAmount.toStringAsFixed(0)}",
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
-                      Text("out of MYR ${report.goalAmount.toStringAsFixed(0)}",
+                      Text("out of MYR ${report.targetAmount.toStringAsFixed(0)}",
                           style: TextStyle(fontSize: 12, color: Colors.grey[600])),
                     ],
                   ),
@@ -167,7 +168,7 @@ class MilestoneDetailsPage extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: LinearProgressIndicator(
-                      value: report.fundsRaised / report.goalAmount,
+                      value: report.raisedAmount / report.targetAmount,
                       backgroundColor: Colors.grey[300],
                       color: AppColors.darkBlue,
                       minHeight: 8,

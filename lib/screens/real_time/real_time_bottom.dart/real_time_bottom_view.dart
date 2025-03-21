@@ -1,18 +1,15 @@
-import 'package:fidefund/models/milestone_model.dart';
+import 'package:fidefund/models/donation_model.dart';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_bubble_transactions.dart';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_milestone_card.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
-import 'package:fidefund/models/transaction_model.dart';
-import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_transactions_card.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/theme/typography.dart';
-import 'package:http/http.dart';
 
 class RealTimeBottomView extends StatelessWidget {
-  final List<Transaction> transactions;
+  final List<Donation> donations;
 
-  const RealTimeBottomView({super.key, required this.transactions});
+  const RealTimeBottomView({super.key, required this.donations});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +31,7 @@ class RealTimeBottomView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Recent Transactions",
+                    "Recent Donations",
                     style: AppTypography.textStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -44,7 +41,7 @@ class RealTimeBottomView extends StatelessWidget {
                   CustomTextButton(
                     text: "View All >",
                     onPressed: () {
-                      // Navigate to full transaction list page
+                      // Navigate to full donatinon list page
                     },
                     color: AppColors.darkBlue,
                   ),
@@ -52,8 +49,7 @@ class RealTimeBottomView extends StatelessWidget {
               ),
             ),
 
-            // RealTimeTransactionsCard(),
-            TransactionBubbleList(),
+            DonationBubbleList(),
 
             SizedBox(height: 12),
 
@@ -72,8 +68,7 @@ class RealTimeBottomView extends StatelessWidget {
                   ),
                   CustomTextButton(
                     text: "View All >",
-                    onPressed: () {
-                    },
+                    onPressed: () {},
                     color: AppColors.darkBlue,
                   ),
                 ],

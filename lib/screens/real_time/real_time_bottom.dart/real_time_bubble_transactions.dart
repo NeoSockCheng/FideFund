@@ -1,29 +1,32 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:fidefund/controllers/donation_controller.dart';
+import 'package:fidefund/models/donation_model.dart';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/recent_transaction_item.dart';
 import 'package:flutter/material.dart';
-import 'package:fidefund/models/transaction_model.dart';
 
-class TransactionBubbleList extends StatefulWidget {
+class DonationBubbleList extends StatefulWidget {
   final double height;
 
-  const TransactionBubbleList({Key? key, this.height = 380.0}) : super(key: key);
+  const DonationBubbleList({Key? key, this.height = 380.0}) : super(key: key);
 
   @override
-  _TransactionBubbleListState createState() => _TransactionBubbleListState();
+  _DonationBubbleListState createState() => _DonationBubbleListState();
 }
 
-class _TransactionBubbleListState extends State<TransactionBubbleList> {
+class _DonationBubbleListState extends State<DonationBubbleList> {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
-  late List<Transaction> _transactions = mockTransactions;
+  late List<Donation> _donation = DonationController.mockDonation;
+  late List<Donation> _allDonation = DonationController.mockDonation;
+
   Timer? _timer;
   final Random _random = Random();
 
   @override
   void initState() {
     super.initState();
-    _transactions = List.from(mockTransactions.take(3)); // Initialize with first 3 transactions
-    _startMockTransactions();
+    _donation = List.from(_allDonation.take(3));
+    _startMockDonations();
   }
 
   @override
@@ -32,39 +35,42 @@ class _TransactionBubbleListState extends State<TransactionBubbleList> {
     super.dispose();
   }
 
-  void _startMockTransactions() {
+  void _startMockDonations() {
     _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
-      addTransaction(mockTransactions[_random.nextInt(mockTransactions.length)]);
+      addDonation(_allDonation[_random.nextInt(_allDonation.length)]);
     });
   }
 
-  void addTransaction(Transaction transaction) {
+  void addDonation(Donation donation) {
     setState(() {
-      if (_transactions.length >= 3) {
-        _removeOldestTransaction();
+      if (_donation.length >= 3) {
+        _removeOldestDonation();
       }
-      _transactions.insert(0, transaction);
-      _listKey.currentState?.insertItem(0, duration: const Duration(milliseconds: 300));
+      _donation.insert(0, donation);
+      _listKey.currentState?.insertItem(
+        0,
+        duration: const Duration(milliseconds: 300),
+      );
     });
   }
 
-  void _removeOldestTransaction() {
+  void _removeOldestDonation() {
     _listKey.currentState?.removeItem(
-      _transactions.length - 1,
-      (context, animation) => _buildTransactionBubble(_transactions.last, animation),
+      _donation.length - 1,
+      (context, animation) => _buildDonationBubble(_donation.last, animation),
       duration: const Duration(milliseconds: 300),
     );
-    _transactions.removeLast();
+    _donation.removeLast();
   }
 
-  Widget _buildTransactionBubble(Transaction transaction, Animation<double> animation) {
+  Widget _buildDonationBubble(Donation donation, Animation<double> animation) {
     return SizeTransition(
       sizeFactor: animation,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: TransactionItem(transaction: transaction),
+          child: RecentDonationBubble(donation: donation),
         ),
       ),
     );
@@ -74,11 +80,11 @@ class _TransactionBubbleListState extends State<TransactionBubbleList> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // White background
-        borderRadius: BorderRadius.circular(12), // Optional: rounded corners
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1), // Light shadow
+            color: Colors.black.withOpacity(0.1),
             spreadRadius: 2,
             blurRadius: 6,
             offset: Offset(0, 3),
@@ -90,13 +96,12 @@ class _TransactionBubbleListState extends State<TransactionBubbleList> {
         child: AnimatedList(
           key: _listKey,
           padding: const EdgeInsets.only(top: 12, bottom: 8),
-          initialItemCount: _transactions.length,
+          initialItemCount: _donation.length,
           itemBuilder: (context, index, animation) {
-            return _buildTransactionBubble(_transactions[index], animation);
+            return _buildDonationBubble(_donation[index], animation);
           },
         ),
       ),
     );
   }
-
 }
