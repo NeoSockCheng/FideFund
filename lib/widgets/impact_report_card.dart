@@ -1,12 +1,12 @@
+import 'package:fidefund/controllers/campaign_controller.dart';
+import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/models/milestone_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/models/impact_report_model.dart';
 import 'package:fidefund/screens/milestone/milestone_details_screen.dart';
 
 class ImpactReportCard extends StatelessWidget {
-  final Milestone report;
-
+  final Campaign report;  
   const ImpactReportCard({Key? key, required this.report}) : super(key: key);
 
   @override
@@ -27,7 +27,7 @@ class ImpactReportCard extends StatelessWidget {
             padding: EdgeInsets.all(10),
             child: Column(
               children: [
-                Text(report.name, textAlign: TextAlign.center, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+                Text(report.title, textAlign: TextAlign.center, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                 SizedBox(height: 5),
                 Text("${report.createdAt.day}/${report.createdAt.month}/${report.createdAt.year}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
                 SizedBox(height: 20),
@@ -42,11 +42,6 @@ class ImpactReportCard extends StatelessWidget {
                       ),
                     );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.darkBlue,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  ),
                   child: Text("Read More", style: TextStyle(color: Colors.white)),
                 ),
               ],

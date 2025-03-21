@@ -13,7 +13,10 @@ class RealTimeMilestoneCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Milestone> milestones = MilestoneController.mockMilestone.sublist(0, 3);
+    List<Milestone> milestones = MilestoneController.mockMilestone.sublist(
+      0,
+      3,
+    );
 
     return Container(
       width: double.infinity,
@@ -22,7 +25,9 @@ class RealTimeMilestoneCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 5)],
+        boxShadow: [
+          BoxShadow(color: Colors.grey.withOpacity(0.5), blurRadius: 5),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,81 +46,85 @@ class RealTimeMilestoneCard extends StatelessWidget {
     );
   }
 
-Widget _buildMilestoneItem(Milestone milestone, BuildContext context) {
+  Widget _buildMilestoneItem(Milestone milestone, BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double horizontalPadding = 16 * 2;
+    double cardPadding = 12 * 2;
+    double imageWidth = 40;
+    double imageMargin = 8;
+    double hashButtonWidth = 70;
 
-  double screenWidth = MediaQuery.of(context).size.width;
-  double horizontalPadding = 16 * 2; 
-  double cardPadding = 12 * 2; 
-  double imageWidth = 40; 
-  double imageMargin = 8; 
-  double hashButtonWidth = 70; 
-  
-  double textWidth = screenWidth - horizontalPadding - cardPadding - imageWidth - imageMargin - hashButtonWidth;
+    double textWidth =
+        screenWidth -
+        horizontalPadding -
+        cardPadding -
+        imageWidth -
+        imageMargin -
+        hashButtonWidth;
 
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Project Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Image(
-              image: AssetImage(milestone.coverImage),
-              width: 55,
-              height: 55,
-              fit: BoxFit.cover,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Project Image
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: Image(
+                image: AssetImage(milestone.coverImage),
+                width: 55,
+                height: 55,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          const SizedBox(width: 8),
-          
-          // Text content with constrained width
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'MYR ${milestone.targetAmount.toStringAsFixed(2)} is released to ${CharityController.getCharityName(CampaignController.getCharityId(milestone.campaignId))}!',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+            const SizedBox(width: 8),
+
+            // Text content with constrained width
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'MYR ${milestone.targetAmount.toStringAsFixed(2)} is released to ${CharityController.getCharityName('ABV')}!',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  'Project "${milestone.name}" is completed, let\'s get excited for what’s coming next!',
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
+                  const SizedBox(height: 2),
+                  Text(
+                    'Project "${milestone.title}" is completed, let\'s get excited for what’s coming next!',
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
-      const SizedBox(height: 4),
+          ],
+        ),
+        const SizedBox(height: 4),
 
-      // Hash Button and timestamp
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            DateTimeHelper.formatDateYearMonthDay(milestone.createdAt),
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-          CustomTextButton(
-            onPressed: () {},
-            text: BlockchainHelper.generateShortenHash(),
-            color: AppColors.primaryBlue,
-          ),
-        ],
-      ),
-    ],
-  );
-}
-
+        // Hash Button and timestamp
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              DateTimeHelper.formatDateYearMonthDay(milestone.createdAt),
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            CustomTextButton(
+              onPressed: () {},
+              text: BlockchainHelper.generateShortenHash(),
+              color: AppColors.primaryBlue,
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 }

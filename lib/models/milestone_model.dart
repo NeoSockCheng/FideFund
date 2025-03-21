@@ -1,8 +1,7 @@
 class Milestone {
   final String id;
-  String name;
+  String title;
   String description;
-  String campaignId;
   int order;
   int contributors;
   double targetAmount;
@@ -15,9 +14,8 @@ class Milestone {
 
   Milestone({
     required this.id,
-    required this.name,
+    required this.title,
     required this.description,
-    required this.campaignId,
     required this.order,
     required this.contributors,
     required this.targetAmount,
@@ -28,5 +26,4 @@ class Milestone {
     this.document,
     required this.createdAt,
   });
-
 }
