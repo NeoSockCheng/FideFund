@@ -1,6 +1,8 @@
 import 'package:fidefund/models/milestone_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/models/impact_report_model.dart';
+import 'package:fidefund/screens/milestone/milestone_details_screen.dart';
 
 class ImpactReportCard extends StatelessWidget {
   final Milestone report;
@@ -29,12 +31,21 @@ class ImpactReportCard extends StatelessWidget {
                 SizedBox(height: 5),
                 Text("${report.createdAt.day}/${report.createdAt.month}/${report.createdAt.year}", textAlign: TextAlign.center, style: TextStyle(fontSize: 12, color: Colors.grey[600])),
                 SizedBox(height: 20),
+                
+                // Updated ElevatedButton to navigate on click
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MilestoneDetailsPage(report: report),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.darkBlue,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   ),
                   child: Text("Read More", style: TextStyle(color: Colors.white)),
                 ),
