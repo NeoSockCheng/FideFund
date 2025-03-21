@@ -1,5 +1,6 @@
 import 'package:fidefund/models/milestone_model.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/utils/blockchain_helper.dart';
 import 'package:fidefund/widgets/circle_avatar.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,7 @@ Widget _buildMilestoneItem(Milestone milestone, BuildContext context) {
           ),
           CustomTextButton(
             onPressed: () {},
-            text: milestone.hashValue,
+            text: BlockchainHelper.generateShortenHash(),
             color: AppColors.primaryBlue,
           ),
         ],

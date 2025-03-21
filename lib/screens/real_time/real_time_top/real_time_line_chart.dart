@@ -22,7 +22,7 @@ class _RealTimeLineChartState extends State<RealTimeLineChart> {
   void initState() {
     super.initState();
     chartData = getChartData();
-    _timer = Timer.periodic(const Duration(seconds: 1), updateDataSource);
+    _timer = Timer.periodic(const Duration(seconds: 10), updateDataSource);
   }
 
   @override

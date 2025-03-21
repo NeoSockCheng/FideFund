@@ -26,7 +26,7 @@ class _RealTimeAppBarState extends State<RealTimeAppBar> {
   }
 
   void _startUpdatingAmount() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 10), (timer) {
       setState(() {
         _currentAmount += Random().nextInt(4991) + 10; // Add 10 - 5000 every second
       });

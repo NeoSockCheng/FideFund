@@ -1,10 +1,10 @@
+import 'package:fidefund/models/currency_model.dart';
 import 'package:fidefund/models/transaction_model.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/utils/app_images.dart';
+import 'package:fidefund/utils/blockchain_helper.dart';
 import 'package:fidefund/widgets/circle_avatar.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class TransactionItem extends StatelessWidget {
   final Transaction transaction;
@@ -18,6 +18,7 @@ class TransactionItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final currency = Currency.fromString(transaction.cryptoUsed);
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -32,11 +33,11 @@ class TransactionItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               /// Donor Avatar, Name, and Description
-              Row(
+               Row(
                 children: [
                   CustomCircularAvatar(
-                    radius: 20,
-                    imagePath: AppImages.imageUserProfile1,
+                    radius: 15,
+                    imagePath: transaction.userPhoto,
                   ),
                   const SizedBox(width: 8),
                   Column(
@@ -50,11 +51,14 @@ class TransactionItem extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 2),
-                      Text(
-                        transaction.description,
-                        style: const TextStyle(fontSize: 12, color: Colors.grey),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.4, // Limit width to 60%
+                        child: Text(
+                          transaction.description,
+                          style: const TextStyle(fontSize: 12, color: Colors.grey),
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -62,19 +66,37 @@ class TransactionItem extends StatelessWidget {
               ),
 
               /// Donation Amount
+              /// Donation Amount with Currency Image
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(
-                    "${transaction.btcUsed} BTC",
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "${transaction.transactionValue} ${transaction.cryptoUsed.toUpperCase()}",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Image.asset(
+                        currency.image,
+                        width: 15,
+                        height: 15,
+                      ),
+                      const SizedBox(width: 4),
+                    ],
                   ),
                   Text(
                     "(~MYR ${transaction.valueInMyr})",
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  ),
+                  CustomTextButton(
+                    onPressed: () {},
+                    text: BlockchainHelper.generateShortenHash(),
+                    color: AppColors.primaryBlue,
+                    fontSize: 12,
                   ),
                 ],
               ),
@@ -87,11 +109,7 @@ class TransactionItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              CustomTextButton(
-                onPressed: () {},
-                text: '0xjsoe...dfmc1s',
-                color: AppColors.primaryBlue,
-              ),
+              
             ],
           ),
         ],
