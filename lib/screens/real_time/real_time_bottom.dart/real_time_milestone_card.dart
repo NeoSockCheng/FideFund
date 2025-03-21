@@ -4,6 +4,7 @@ import 'package:fidefund/utils/blockchain_helper.dart';
 import 'package:fidefund/widgets/circle_avatar.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class RealTimeMilestoneCard extends StatelessWidget {
   const RealTimeMilestoneCard({Key? key}) : super(key: key);
@@ -103,7 +104,7 @@ Widget _buildMilestoneItem(Milestone milestone, BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            '2025.1.1 12:12:11',
+            DateFormat('HH:mm:ss').format(DateTime.now()),
             style: const TextStyle(fontSize: 12, color: Colors.grey),
           ),
           CustomTextButton(

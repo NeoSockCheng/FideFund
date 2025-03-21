@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 
 class TransactionItem extends StatelessWidget {
   final Transaction transaction;
-  final Color backgroundColor; // New parameter for card color
+  final Color backgroundColor; 
 
   const TransactionItem({
     Key? key,
     required this.transaction,
-    this.backgroundColor = AppColors.secondaryBlue, // Default color
+    this.backgroundColor = AppColors.secondaryBlue,
   }) : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class TransactionItem extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: backgroundColor, // Apply background color
+        color: backgroundColor, 
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
@@ -32,6 +32,7 @@ class TransactionItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               /// Donor Avatar, Name, and Description
                Row(
                 children: [
@@ -52,7 +53,7 @@ class TransactionItem extends StatelessWidget {
                       ),
                       const SizedBox(height: 2),
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.4, // Limit width to 60%
+                        width: MediaQuery.of(context).size.width * 0.4, 
                         child: Text(
                           transaction.description,
                           style: const TextStyle(fontSize: 12, color: Colors.grey),
@@ -65,7 +66,6 @@ class TransactionItem extends StatelessWidget {
                 ],
               ),
 
-              /// Donation Amount
               /// Donation Amount with Currency Image
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,

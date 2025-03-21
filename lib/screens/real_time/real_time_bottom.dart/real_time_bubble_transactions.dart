@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/recent_transaction_item.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:fidefund/models/transaction_model.dart';
 
 class TransactionBubbleList extends StatefulWidget {

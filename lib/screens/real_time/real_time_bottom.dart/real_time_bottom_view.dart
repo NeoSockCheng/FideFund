@@ -73,7 +73,6 @@ class RealTimeBottomView extends StatelessWidget {
                   CustomTextButton(
                     text: "View All >",
                     onPressed: () {
-                      // Navigate to full transaction list page
                     },
                     color: AppColors.darkBlue,
                   ),
