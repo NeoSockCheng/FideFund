@@ -1,5 +1,6 @@
 import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
+import 'package:fidefund/screens/home/transaction_screen.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/widgets/campaign_card.dart';
 import 'package:flutter/material.dart';
@@ -62,8 +63,10 @@ class HomePage extends StatelessWidget {
                       padding: EdgeInsets.symmetric(vertical: 20),
                       child: InkWell(
                         onTap: () {
-                          // TODO: Navigate to transaction page
-                          //Navigator.pushNamed(context, '/transactions');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TransactionPage()),
+                          );
                         },
                         child: Text(
                           "Your transaction >",
