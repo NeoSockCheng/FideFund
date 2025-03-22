@@ -9,18 +9,9 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   bool isDonor = true;
+  bool isVerifying = false;
+  bool isVerified = false;
   int charityStep = 1;
-  Map<String, String?> uploadedFiles = {};
-
-  Future<void> _pickFile(String key) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-    if (result != null) {
-      setState(() {
-        uploadedFiles[key] = result.files.single.name;
-      });
-    }
-  }
-
   final TextEditingController _organizationNameController =
       TextEditingController();
   final TextEditingController _registrationNumberController =
@@ -32,6 +23,17 @@ class _SignupPageState extends State<SignupPage> {
       TextEditingController();
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
+
+  Map<String, String?> uploadedFiles = {};
+
+  Future<void> _pickFile(String key) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      setState(() {
+        uploadedFiles[key] = result.files.single.name;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +137,7 @@ class _SignupPageState extends State<SignupPage> {
           _confirmPasswordController,
           obscureText: true,
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 60),
         _buildSubmitButton("Sign Up"),
       ],
     );
@@ -155,7 +157,8 @@ class _SignupPageState extends State<SignupPage> {
             _confirmPasswordController,
             obscureText: true,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 60),
+
           _buildSubmitButton(
             "Next",
             onPressed: () {
@@ -183,11 +186,78 @@ class _SignupPageState extends State<SignupPage> {
           _buildFileUploadField("Upload Registration Certificate"),
           _buildFileUploadField("Upload Representative's ID"),
           _buildFileUploadField("Upload Proof of Authorization"),
+
           const SizedBox(height: 20),
+
+          // Verify Button
+          ElevatedButton(
+            onPressed: isVerified ? null : _verifyOrganization,
+            style: ElevatedButton.styleFrom(
+              backgroundColor:
+                  isVerified ? AppColors.lightGrey : AppColors.secondaryBlue,
+              foregroundColor: AppColors.darkBlue,
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              minimumSize: const Size(250, 50),
+            ),
+            child: Text(
+              isVerified ? "Verified" : "Verify Document",
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+
+          const SizedBox(height: 120),
           _buildSubmitButton("Sign Up"),
         ],
       );
     }
+  }
+
+  void _verifyOrganization() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return AlertDialog(
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  isVerifying
+                      ? const CircularProgressIndicator() // Show loading
+                      : const Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                        size: 50,
+                      ),
+                  const SizedBox(height: 20),
+                  Text(
+                    isVerifying ? "Verifying..." : "Verified Successfully!",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+
+    // Simulate verification delay
+    setState(() {
+      isVerifying = true;
+    });
+
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        isVerifying = false;
+        isVerified = true;
+      });
+      Navigator.of(context).pop(); // Close popup
+    });
   }
 
   Widget _buildTextField(
@@ -217,7 +287,7 @@ class _SignupPageState extends State<SignupPage> {
       child: GestureDetector(
         onTap: () => _pickFile(label),
         child: Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white),
             borderRadius: BorderRadius.circular(10),
