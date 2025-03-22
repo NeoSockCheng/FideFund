@@ -1,4 +1,5 @@
 import 'package:fidefund/models/donation_model.dart';
+import 'package:fidefund/screens/real_time/real_time_all_donations/real_time_all_donations.dart';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_bubble_transactions.dart';
 import 'package:fidefund/screens/real_time/real_time_bottom.dart/real_time_milestone_card.dart';
 import 'package:fidefund/widgets/custom_text_button.dart';
@@ -41,7 +42,12 @@ class RealTimeBottomView extends StatelessWidget {
                   CustomTextButton(
                     text: "View All >",
                     onPressed: () {
-                      // Navigate to full donatinon list page
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const RealTimeAllDonations(),
+                        ),
+                      );
                     },
                     color: AppColors.darkBlue,
                   ),

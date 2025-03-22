@@ -1,4 +1,4 @@
-class Transaction {
+  class Transaction {
   final String hash;
   final String campaignTitle;
   final String senderAddress;

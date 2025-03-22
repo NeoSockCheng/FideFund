@@ -43,13 +43,18 @@ class CampaignCard extends StatelessWidget {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 4),
-                          child: Text(
-                            "${campaign.title}",
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: AppColors.darkBlue,
-                            ),
-                          ),
+                          child: SizedBox(
+        width: 170, // Fixed width (adjust as needed)
+        child: Text(
+          campaign.title,
+          style: const TextStyle(
+            fontSize: 12,
+            color: AppColors.darkBlue,
+          ),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ),
+      ),
                         ),
                         const Spacer(),
                         Chip(

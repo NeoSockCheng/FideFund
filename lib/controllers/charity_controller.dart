@@ -131,10 +131,20 @@ class CharityController {
   static String getCharityName(String charityId) {
     try {
       return mockCharity
-          .firstWhere((campaign) => campaign.id == charityId)
+          .firstWhere((charity) => charity.id == charityId)
           .name;
     } catch (e) {
       return "Charity Name";
+    }
+  }
+
+  static String? getCharityImage(String charityId) {
+    try {
+      return mockCharity
+          .firstWhere((charity) => charity.id == charityId)
+          .logoImage;
+    } catch (e) {
+      return null;
     }
   }
 }
