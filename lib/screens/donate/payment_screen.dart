@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/screens/donate/payment_screen.dart';
+import 'package:fidefund/models/campaign_model.dart';
 
 class PaymentPage extends StatefulWidget {
+  final Campaign report;
+
+  const PaymentPage({Key? key, required this.report}) : super(key: key);
+
   @override
   _PaymentPageState createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
   bool isCryptoSelected = true;
+  bool isTnCChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +42,11 @@ class _PaymentPageState extends State<PaymentPage> {
               style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
             Text(
-              "Girls' Education Fundraising Project",
+              widget.report.title, // Extracting report title dynamically
               style: TextStyle(fontSize: 20, color: AppColors.black),
             ),
             SizedBox(height: 20),
-            
+
             // Payment method toggle
             Row(
               children: [
@@ -59,36 +66,47 @@ class _PaymentPageState extends State<PaymentPage> {
               ],
             ),
             SizedBox(height: 30),
-            
+
             // Payment form
             isCryptoSelected ? _buildCryptoForm() : _buildCardForm(),
-            
+
             SizedBox(height: 40),
-            
+
             // Terms and Continue button
-            Row(
-              children: [
-                Icon(Icons.check_circle, color: AppColors.darkBlue, size: 20),
-                SizedBox(width: 8),
-                Expanded(
-                  child: Text(
-                    "By proceeding the donation, you agree with our Terms of Use and Privacy Policy.",
-                    style: TextStyle(fontSize: 12, color: Colors.grey[700]),
-                  ),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    isTnCChecked = !isTnCChecked;
+                  });
+                },
+                child: Icon(
+                  isTnCChecked ? Icons.check_circle : Icons.circle_outlined,
+                  color: AppColors.darkBlue,
+                  size: 20,
                 ),
-              ],
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.darkBlue,
-                foregroundColor: Colors.white,
-                minimumSize: Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
               ),
-              child: Text("Continue", style: TextStyle(fontSize: 16)),
+              SizedBox(width: 8),
+              Expanded(
+                child: Text(
+                  "By proceeding the donation, you agree with our Terms of Use and Privacy Policy.",
+                  style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: isTnCChecked ? () {} : null, // Disabled if not checked
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.darkBlue,
+              foregroundColor: Colors.white,
+              minimumSize: Size(double.infinity, 50),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
             ),
+            child: Text("Continue", style: TextStyle(fontSize: 16)),
+          ),
           ],
         ),
       ),
