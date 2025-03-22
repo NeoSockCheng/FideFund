@@ -1,5 +1,6 @@
 import 'package:fidefund/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:fidefund/screens/auth/login_screen.dart'; // Ensure this file exists and is correctly implemented
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -63,7 +64,6 @@ class ProfilePage extends StatelessWidget {
               ),
             ],
           ),
-
           SizedBox(height: 10),
           Text(
             "Skeleton",
@@ -84,25 +84,33 @@ class ProfilePage extends StatelessWidget {
         _buildListTile(Icons.lock, "Identity Verification"),
         _buildListTile(Icons.nightlight_round, "Preferences"),
         _buildListTile(Icons.settings, "Settings"),
-        _buildListTile(Icons.logout, "Logout"),
+        _buildListTile(Icons.logout, "Logout", onTap: () => _handleLogout(context)),
       ],
     );
   }
 
-  /// Custom ListTile Builder
-  Widget _buildListTile(IconData icon, String title) {
+  /// Custom ListTile Builder with optional onTap callback
+  Widget _buildListTile(IconData icon, String title, {VoidCallback? onTap}) {
     return Column(
       children: [
         ListTile(
           leading: Icon(icon, size: 24, color: Colors.black),
           title: Text(title, style: TextStyle(fontSize: 16)),
           trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
-          onTap: () {
-            // Add Navigation Logic Here
-          },
+          onTap: onTap,
         ),
         Divider(height: 1, thickness: 0.5, color: Colors.grey[300]),
       ],
+    );
+  }
+
+  /// Logout Handler
+  void _handleLogout(BuildContext context) {
+    // Navigate to LoginPage and clear navigation history
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => LoginPage()),
+      (Route<dynamic> route) => false, // Removes all previous routes
     );
   }
 }

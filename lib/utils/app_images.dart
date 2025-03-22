@@ -48,7 +48,16 @@ class AppImages {
       'assets/images/user_profile/image_skeleton.png';
 
   //milestone photos
-  static const String imageMilestoneFlood = 'assets/images/milestone/flood.png';
+  static const String imageMilestoneFlood = 
+      'assets/images/milestone/flood.png'; 
+  static const String imageMilestoneFlood1 = 
+      'assets/images/milestone/flood_1.png';
+  static const String imageMilestoneFlood2 = 
+      'assets/images/milestone/flood_2.png';
+  static const String imageMilestoneFlood3 = 
+      'assets/images/milestone/flood_3.png'; 
+  static const String imageMilestoneFlood4 = 
+      'assets/images/milestone/flood_4.png';
   static const String imageMilestoneGadgets =
       'assets/images/milestone/gadgets.png';
   static const String imageMilestoneHomeless =

@@ -1,5 +1,6 @@
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/models/milestone_model.dart';
+import 'package:fidefund/screens/donate/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
 
@@ -115,78 +116,86 @@ class MilestoneDetailsPage extends StatelessWidget {
               textAlign: TextAlign.justify,
             ),
 
-            SizedBox(height: 16),
+            SizedBox(height: 30),
 
-            // Financial Proof
+            // Financial Proof Section
             Text("Financial Proof", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal, // Enables horizontal scrolling
+              child: Row(
+                children: report.milestones
+                    .expand((milestone) => milestone.document ?? []) 
+                    .map((proof) => _buildProofCard(proof))
+                    .toList(),
+              ),
+            ),
+
+            SizedBox(height: 30),
+
+            // Photos & Videos Section
+            Text("Photos & Videos", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            SizedBox(height: 8),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal, 
+              child: Row(
+                children: report.milestones
+                    .expand((milestone) => milestone.image ?? []) 
+                    .map((media) => _buildImageCard(media))
+                    .toList(),
+              ),
+            ),
+
+            SizedBox(height: 16)
+          ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.4), blurRadius: 10)],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _buildProofCard("Transaction Receipt"),
-                _buildProofCard("Transaction Receipt"),
+                Text(
+                  "MYR ${report.raisedAmount.toStringAsFixed(0)}",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Text("out of MYR ${report.targetAmount.toStringAsFixed(0)}",
+                    style: TextStyle(fontSize: 12, color: Colors.grey[600])),
               ],
             ),
-
-            SizedBox(height: 16),
-
-            // Photos & Videos
-            Text("Photos & Videos", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-            SizedBox(height: 8),
-            Row(
-              children: [
-                _buildImageCard(report.coverImage),
-                _buildImageCard(report.coverImage),
-                _buildImageCard(report.coverImage),
-              ],
+            SizedBox(height: 6),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: LinearProgressIndicator(
+                value: report.raisedAmount / report.targetAmount,
+                backgroundColor: Colors.grey[300],
+                color: AppColors.darkBlue,
+                minHeight: 8,
+              ),
             ),
-
-            SizedBox(height: 16),
-
-            // Donation Progress & Button
-            Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 5)],
+            SizedBox(height: 12),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PaymentPage(report: report)),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.darkBlue,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                padding: EdgeInsets.symmetric(vertical: 12),
+                minimumSize: Size(double.infinity, 40),
               ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "MYR ${report.raisedAmount.toStringAsFixed(0)}",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                      ),
-                      Text("out of MYR ${report.targetAmount.toStringAsFixed(0)}",
-                          style: TextStyle(fontSize: 12, color: Colors.grey[600])),
-                    ],
-                  ),
-                  SizedBox(height: 6),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: LinearProgressIndicator(
-                      value: report.raisedAmount / report.targetAmount,
-                      backgroundColor: Colors.grey[300],
-                      color: AppColors.darkBlue,
-                      minHeight: 8,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.darkBlue,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                      padding: EdgeInsets.symmetric(vertical: 12),
-                      minimumSize: Size(double.infinity, 40),
-                    ),
-                    child: Text("Donate", style: TextStyle(color: Colors.white, fontSize: 16)),
-                  ),
-                ],
-              ),
+              child: Text("Donate", style: TextStyle(color: Colors.white, fontSize: 16)),
             ),
           ],
         ),
@@ -195,33 +204,37 @@ class MilestoneDetailsPage extends StatelessWidget {
   }
 
   // Helper Widget for Financial Proof
-  Widget _buildProofCard(String title) {
-    return Container(
-      width: 140,
-      height: 100,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 5)],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.receipt_long, size: 40, color: Colors.blue),
-          SizedBox(height: 8),
-          Text(title, style: TextStyle(fontSize: 12, color: Colors.grey[700])),
-        ],
+  Widget _buildProofCard(String proofTitle) {
+    return Padding(
+      padding: EdgeInsets.only(right: 12),
+      child: Container(
+        width: 170,
+        height: 200,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 5)],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.receipt_long, size: 40, color: AppColors.darkBlue),
+            SizedBox(height: 8),
+            Text(proofTitle, style: TextStyle(fontSize: 12, color: Colors.grey[700])),
+          ],
+        ),
       ),
     );
   }
 
+
   // Helper Widget for Image Card
-  Widget _buildImageCard(String imageUrl) {
+  Widget _buildImageCard(String image) {
     return Padding(
       padding: EdgeInsets.only(right: 8),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.network(imageUrl, width: 100, height: 80, fit: BoxFit.cover),
+        child: Image.asset(image, width: 150, height: 160, fit: BoxFit.cover),
       ),
     );
   }

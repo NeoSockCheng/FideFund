@@ -115,8 +115,8 @@ class _MilestonePageState extends State<MilestonePage> {
   /// Impact Reports GridView
   Widget _buildImpactReportsGrid(List<Campaign> currentReports) {
     return GridView.builder(
-      shrinkWrap: true, // Make GridView take only necessary space
-      physics: NeverScrollableScrollPhysics(), // Disable GridView scrolling
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(), 
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 20,
@@ -147,7 +147,7 @@ class _MilestonePageState extends State<MilestonePage> {
                     currentPage--;
                   });
                 }
-              : null, // Disable button if on the first page
+              : null, 
         ),
         SizedBox(width: 20),
         Text(
@@ -167,7 +167,7 @@ class _MilestonePageState extends State<MilestonePage> {
                     currentPage++;
                   });
                 }
-              : null, // Disable button if on the last page
+              : null,
         ),
       ],
     );
