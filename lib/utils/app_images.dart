@@ -15,15 +15,15 @@ class AppImages {
   static const String imageCharityNKVE =
       'assets/images/charity_profile/image_charity_nkve.jpg';
   static const String imageCharityNCSM =
-      'assets/images/charity_profile/image_charity_ncsm.jpg';
+      'assets/images/charity_profile/image_charity_ncsm.png';
   static const String imageCharityDogs =
-      'assets/images/charity_profile/image_charity_dogs.jpg';
+      'assets/images/charity_profile/image_charity_dogs.png';
   static const String imageCharityGlobalAid =
-      'assets/images/charity_profile/image_charity_global_aid.jpg';
+      'assets/images/charity_profile/image_charity_global_aid.png';
   static const String imageCharityGreenEarth =
-      'assets/images/charity_profile/image_charity_green_earth.jpg';
+      'assets/images/charity_profile/image_charity_green_earth.png';
   static const String imageCharityKids =
-      'assets/images/charity_profile/image_charity_kids.jpg';
+      'assets/images/charity_profile/image_charity_kids.png';
 
   //user profile
   static const String imageUserMM1 =

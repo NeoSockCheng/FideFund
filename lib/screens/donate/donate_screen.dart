@@ -1,7 +1,7 @@
 import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/widgets/campaign_card.dart';
-import 'package:fidefund/widgets/search_bar.dart'; // ✅ Import SearchBar
+import 'package:fidefund/widgets/search_bar.dart'; 
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
