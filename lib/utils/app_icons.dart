@@ -4,7 +4,9 @@ class AppIcons {
   static const String iconRealTime = 'assets/icons/icon_real_time.png';
   static const String iconMilestone = 'assets/icons/icon_milestone.png';
   static const String iconProfile = 'assets/icons/icon_profile.png';
-  
+  static const String iconReleasePayment =
+      'assets/icons/icon_release_payment.png';
+
   // currency
   static const String iconBTC = "assets/icons/currency/icon_btc.png";
   static const String iconETH = "assets/icons/currency/icon_eth.png";

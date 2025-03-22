@@ -97,7 +97,7 @@ class ForgotPasswordPage extends StatelessWidget {
                         ),
                         keyboardType: TextInputType.emailAddress,
                       ),
-                      const SizedBox(height: 30),
+                      const SizedBox(height: 50),
 
                       // Reset Password Button
                       SizedBox(
@@ -110,13 +110,13 @@ class ForgotPasswordPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             backgroundColor: AppColors.milkyWhite,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(15),
                             ),
                           ),
                           child: const Text(
                             "Reset Password",
                             style: TextStyle(
-                              color: Color(0xFF2C5E72),
+                              color: AppColors.darkBlue,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
