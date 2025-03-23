@@ -1,6 +1,4 @@
-import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
-import 'package:fidefund/models/milestone_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/screens/milestone/milestone_details_screen.dart';
@@ -42,7 +40,7 @@ class ImpactReportCard extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text("Read More", style: TextStyle(color: Colors.white)),
+                  child: Text("Read More", style: TextStyle(color: AppColors.white)),
                 ),
               ],
             ),

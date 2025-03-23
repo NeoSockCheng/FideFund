@@ -1,5 +1,4 @@
 import 'package:fidefund/models/campaign_model.dart';
-import 'package:fidefund/models/milestone_model.dart';
 import 'package:fidefund/screens/donate/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
