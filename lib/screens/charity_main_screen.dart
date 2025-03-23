@@ -18,7 +18,7 @@ class _CharityMainState extends State<CharityMain> {
 
   final List<Widget> _pages = [
     CharityHomePage(),
-    CharityReleasePaymentPage(),
+    CharityPaymentReleasePage(),
     CharityProfilePage(),
   ];
 

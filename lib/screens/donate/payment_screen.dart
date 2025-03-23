@@ -15,6 +15,27 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   bool isCryptoSelected = true;
   bool isTnCChecked = false;
+  double btcRate = 384113.61; // Example rate
+  TextEditingController cryptoController = TextEditingController();
+  TextEditingController myrController = TextEditingController();
+
+  void _convertCryptoToMYR(String value) {
+    if (value.isEmpty) {
+      myrController.clear();
+      return;
+    }
+    double btc = double.tryParse(value) ?? 0;
+    myrController.text = (btc * btcRate).toStringAsFixed(2);
+  }
+
+  void _convertMYRToCrypto(String value) {
+    if (value.isEmpty) {
+      cryptoController.clear();
+      return;
+    }
+    double myr = double.tryParse(value) ?? 0;
+    cryptoController.text = (myr / btcRate).toStringAsFixed(8);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +87,8 @@ class _PaymentPageState extends State<PaymentPage> {
               ],
             ),
             SizedBox(height: 30),
-
-            // Payment form
             isCryptoSelected ? _buildCryptoForm() : _buildCardForm(),
-
             SizedBox(height: 40),
-
             // Terms and Continue button
           Row(
             children: [
@@ -146,6 +163,8 @@ class _PaymentPageState extends State<PaymentPage> {
       children: [
         _buildInputField(
           label: "Crypto",
+          controller: cryptoController,
+          onChanged: _convertCryptoToMYR,
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -164,6 +183,8 @@ class _PaymentPageState extends State<PaymentPage> {
         SizedBox(height: 16),
         _buildInputField(
           label: "Amount",
+          controller: myrController,
+          onChanged: _convertMYRToCrypto,
           suffixIcon: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -216,6 +237,8 @@ class _PaymentPageState extends State<PaymentPage> {
 
   Widget _buildInputField({
     required String label,
+    TextEditingController? controller,
+    Function(String)? onChanged,
     String? hintText,
     Widget? suffixIcon,
   }) {
@@ -225,6 +248,9 @@ class _PaymentPageState extends State<PaymentPage> {
         Text(label, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500)),
         SizedBox(height: 8),
         TextField(
+          controller: controller,
+          onChanged: onChanged,
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
           decoration: InputDecoration(
             hintText: hintText,
             contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
