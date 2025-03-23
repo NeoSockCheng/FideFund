@@ -59,9 +59,68 @@ class CharityHomePage extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.centerRight,
-                    child: Padding(padding: EdgeInsets.symmetric(vertical: 20)),
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 5),
+                    ),
                   ),
                 ],
+              ),
+            ),
+
+            SizedBox(height: 20),
+
+            // "Start a Campaign" Button
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 50),
+              child: GestureDetector(
+                onTap: () {
+                  // TODO: Add navigation or action
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF41798E), // Teal Blue Color
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Start a Campaign",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 4),
+                          Row(
+                            children: List.generate(
+                              8,
+                              (index) => Padding(
+                                padding: const EdgeInsets.only(right: 4),
+                                child: Icon(
+                                  Icons.chevron_right,
+                                  color: Colors.white,
+                                  size: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Icon(
+                        Icons.favorite_border,
+                        color: Color(0xFFE14D94),
+                        size: 50,
+                      ), // Pink Heart Icon
+                    ],
+                  ),
+                ),
               ),
             ),
 
