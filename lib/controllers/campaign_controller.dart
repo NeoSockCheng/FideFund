@@ -5,7 +5,6 @@ import 'package:fidefund/utils/app_images.dart';
 import 'package:fidefund/utils/date_time_helper.dart';
 
 class CampaignController {
-
   static List<Campaign> mockCampaigns = [
     Campaign(
       id: "1",
@@ -23,6 +22,7 @@ class CampaignController {
       endDate: DateTime(2025, 4, 1),
       isActive: true,
       createdAt: DateTime(2025, 3, 14),
+      status: "Active",
       milestones: MilestoneController.milestonesDogs,
     ),
     Campaign(
@@ -41,6 +41,7 @@ class CampaignController {
       endDate: DateTime(2025, 4, 5),
       isActive: true,
       createdAt: DateTime(2025, 3, 10),
+      status: "Pending",
       milestones: MilestoneController.milestonesGadgets,
     ),
     Campaign(
@@ -59,6 +60,7 @@ class CampaignController {
       endDate: DateTime(2025, 3, 1),
       isActive: true,
       createdAt: DateTime(2025, 2, 7),
+      status: "Active",
       milestones: MilestoneController.milestonesFlood,
     ),
     Campaign(
@@ -77,6 +79,7 @@ class CampaignController {
       endDate: DateTime(2025, 2, 15),
       isActive: true,
       createdAt: DateTime(2025, 1, 25),
+      status: "Active",
       milestones: MilestoneController.milestoneTree,
     ),
     Campaign(
@@ -95,6 +98,7 @@ class CampaignController {
       endDate: DateTime(2025, 4, 1),
       isActive: true,
       createdAt: DateTime(2025, 3, 5),
+      status: "Pending",
       milestones: MilestoneController.milestonesOrphans,
     ),
     Campaign(
@@ -113,6 +117,7 @@ class CampaignController {
       endDate: DateTime(2025, 3, 10),
       isActive: true,
       createdAt: DateTime(2025, 2, 28),
+      status: "Active",
       milestones: MilestoneController.milestonesMedical,
     ),
     Campaign(
@@ -131,6 +136,7 @@ class CampaignController {
       endDate: DateTime(2025, 3, 10),
       isActive: true,
       createdAt: DateTime(2025, 2, 15),
+      status: "Active",
       milestones: MilestoneController.milestonesCleanWater,
     ),
     Campaign(
@@ -149,6 +155,7 @@ class CampaignController {
       endDate: DateTime(2025, 2, 20),
       isActive: true,
       createdAt: DateTime(2025, 1, 30),
+      status: "Pending",
       milestones: MilestoneController.milestonesHomeless,
     ),
     Campaign(
@@ -167,6 +174,7 @@ class CampaignController {
       endDate: DateTime(2025, 3, 5),
       isActive: true,
       createdAt: DateTime(2025, 1, 20),
+      status: "Completed",
       milestones: MilestoneController.milestonesScholarship,
     ),
     Campaign(
@@ -185,6 +193,7 @@ class CampaignController {
       endDate: DateTime(2025, 4, 1),
       isActive: true,
       createdAt: DateTime(2025, 3, 2),
+      status: "Active",
       milestones: MilestoneController.milestonesRebuild,
     ),
   ];

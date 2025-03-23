@@ -4,7 +4,7 @@ class Campaign {
   final String id;
   String title;
   String description;
-  String charityId; 
+  String charityId;
   String category;
   double targetAmount;
   double raisedAmount;
@@ -16,7 +16,8 @@ class Campaign {
   DateTime endDate;
   bool isActive;
   DateTime createdAt;
-  List<Milestone> milestones;  // Added milestone list
+  String status;
+  List<Milestone> milestones; // Added milestone list
 
   Campaign({
     required this.id,
@@ -34,9 +35,10 @@ class Campaign {
     required this.endDate,
     required this.isActive,
     required this.createdAt,
-    this.milestones = const [],  // Default to empty list
+    required this.status,
+    this.milestones = const [], // Default to empty list
   });
-  
+
   factory Campaign.empty() {
     return Campaign(
       id: "",
@@ -55,7 +57,7 @@ class Campaign {
       isActive: false,
       createdAt: DateTime.now(),
       milestones: [],
+      status: "",
     );
   }
-  
 }
