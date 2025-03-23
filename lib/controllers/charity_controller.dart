@@ -17,6 +17,8 @@ class CharityController {
       website: "https://www.cancer.org.my",
       logoImage: AppImages.imageCharityNKVE,
       walletAddress: "0xABCDEF1234567890",
+      about:
+          "provides education, care, and support for cancer patients and families. It offers screening, counseling, and treatment aid to improve cancer awareness and patient well-being.",
       verification: CharityVerification(
         regCertificate: "cert_001",
         representativeId: "rep_001",
@@ -37,6 +39,8 @@ class CharityController {
       website: "https://www.hopefoundation.org",
       logoImage: AppImages.imageCharityKids,
       walletAddress: "0x1234ABCD5678EFGH",
+      about:
+          "Hope Foundation for Children provides shelter, education, and healthcare for underprivileged children. It aims to empower youth through advocacy, support programs, and opportunities for a brighter future.",
       verification: CharityVerification(
         regCertificate: "cert_002",
         representativeId: "rep_002",
@@ -57,6 +61,8 @@ class CharityController {
       website: "https://www.greenearth.org",
       logoImage: AppImages.imageCharityGreenEarth,
       walletAddress: "0x9876ZYXW4321VUTS",
+      about:
+          "Green Earth Conservation Society promotes environmental sustainability through conservation projects, reforestation, and awareness campaigns. It advocates for eco-friendly practices and community involvement to protect nature and combat climate change.",
       verification: CharityVerification(
         regCertificate: "cert_003",
         representativeId: "rep_003",
@@ -77,6 +83,8 @@ class CharityController {
       website: "https://www.globalaid.org",
       logoImage: AppImages.imageCharityGlobalAid,
       walletAddress: "0xA1B2C3D4E5F67890",
+      about:
+          "Global Aid Network delivers humanitarian assistance, disaster relief, and development programs worldwide. It provides food, medical aid, and education, empowering communities to overcome poverty and crises with sustainable solutions.",
       verification: CharityVerification(
         regCertificate: "cert_004",
         representativeId: "rep_004",
@@ -97,6 +105,8 @@ class CharityController {
       website: "https://www.myrelief.org",
       logoImage: AppImages.imageCharityNKVE,
       walletAddress: "0xCDEFA123456789AB",
+      about:
+          "Malaysia Relief Alliance supports disaster-affected communities through emergency aid, healthcare, and rehabilitation programs. It focuses on rebuilding lives, fostering resilience, and ensuring long-term recovery for vulnerable populations.",
       verification: CharityVerification(
         regCertificate: "cert_005",
         representativeId: "rep_005",
@@ -117,6 +127,8 @@ class CharityController {
       website: "https://www.myanimalwelfare.org",
       logoImage: AppImages.imageCharityDogs,
       walletAddress: "0xFEDCBA9876543210",
+      about:
+          "Malaysia Animal Welfare Society advocates for animal rights, rescue operations, and responsible pet ownership. It provides shelter, veterinary care, and adoption services, striving to create a humane and compassionate society for animals.",
       verification: CharityVerification(
         regCertificate: "cert_006",
         representativeId: "rep_006",
@@ -130,9 +142,7 @@ class CharityController {
 
   static String getCharityName(String charityId) {
     try {
-      return mockCharity
-          .firstWhere((charity) => charity.id == charityId)
-          .name;
+      return mockCharity.firstWhere((charity) => charity.id == charityId).name;
     } catch (e) {
       return "Charity Name";
     }

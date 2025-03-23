@@ -1,5 +1,6 @@
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/screens/charity/charity_campaign_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class CharityCampaignCard extends StatelessWidget {
@@ -154,7 +155,15 @@ class CharityCampaignCard extends StatelessWidget {
                         // View Button
                         OutlinedButton.icon(
                           onPressed: () {
-                            // Handle View action
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => CharityCampaignDetailsPage(
+                                      campaign: campaign,
+                                    ),
+                              ),
+                            );
                           },
                           icon: Image.asset(
                             'assets/icons/icon_view.png',

@@ -1,0 +1,263 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:fidefund/theme/colors.dart';
+
+class CharityCreateCampaignPage extends StatefulWidget {
+  @override
+  _CharityCreateCampaignPageState createState() =>
+      _CharityCreateCampaignPageState();
+}
+
+class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
+  final _formKey = GlobalKey<FormState>();
+  bool isCreating = true;
+
+  TextEditingController titleController = TextEditingController();
+  TextEditingController categoryController = TextEditingController();
+  TextEditingController aboutController = TextEditingController();
+  TextEditingController goalController = TextEditingController();
+  TextEditingController milestoneController = TextEditingController();
+  TextEditingController startDateController = TextEditingController();
+  TextEditingController endDateController = TextEditingController();
+
+  Map<String, String?> uploadedFiles = {};
+
+  Future<void> _pickFile(String key) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    if (result != null) {
+      setState(() {
+        uploadedFiles[key] = result.files.single.name;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(20.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                  SizedBox(width: 10),
+                  Text(
+                    "Create a New Campaign",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+
+              buildTextField("Campaign Title", titleController),
+              buildTextField("Category", categoryController),
+              buildTextField("About", aboutController, maxLines: 4),
+              buildTextField("Goal of Campaign", goalController),
+              buildTextField("Milestone", milestoneController),
+
+              SizedBox(height: 16),
+              Text(
+                "Campaign Period",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                    child: buildTextField("Start Date", startDateController),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: buildTextField("End Date", endDateController),
+                  ),
+                ],
+              ),
+
+              _buildFileUploadField("Upload Registration Certificate"),
+              _buildFileUploadField("Upload Representative's ID"),
+              _buildFileUploadField("Upload Proof of Authorization"),
+
+              SizedBox(height: 20),
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      _showCreatingDialog();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 24),
+                    backgroundColor: AppColors.darkBlue,
+                  ),
+                  child: Text(
+                    "Create Now",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget buildTextField(
+    String label,
+    TextEditingController controller, {
+    int maxLines = 1,
+  }) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(label, style: TextStyle(fontWeight: FontWeight.bold)),
+          SizedBox(height: 8),
+          TextFormField(
+            controller: controller,
+            maxLines: maxLines,
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: AppColors.secondaryBlue,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 5),
+            ),
+            validator: (value) {
+              if (value == null || value.isEmpty)
+                return "This field is required";
+              return null;
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildUploadSection(
+    String title,
+    String description,
+    File? selectedFile,
+    VoidCallback onUploadPressed,
+  ) {
+    return Container(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.blueGrey[100],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        children: [
+          IconButton(
+            icon: Icon(Icons.upload_file, size: 40, color: Colors.black54),
+            onPressed: onUploadPressed,
+          ),
+          SizedBox(height: 8),
+          Text(
+            selectedFile != null
+                ? "Selected: ${selectedFile.path.split('/').last}"
+                : description,
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.black54),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFileUploadField(String label) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: GestureDetector(
+        onTap: () => _pickFile(label),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.secondaryBlue,
+              width: 1.5,
+            ), // Border color updated
+            borderRadius: BorderRadius.circular(10),
+            color: AppColors.secondaryBlue, // Background color updated
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.upload_file, color: Colors.black),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Text(
+                  uploadedFiles[label] ?? label,
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showCreatingDialog() {
+    setState(() {
+      isCreating = true;
+    });
+
+    showDialog(
+      context: context,
+      barrierDismissible: false, // Prevent dismissing dialog
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            Future.delayed(Duration(seconds: 2), () {
+              setState(() {
+                isCreating = false; // Change state after delay
+              });
+            });
+
+            return AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  isCreating
+                      ? CircularProgressIndicator()
+                      : Icon(Icons.check_circle, color: Colors.green, size: 50),
+                  SizedBox(height: 16),
+                  Text(
+                    isCreating ? "Creating..." : "Created Successfully!",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              actions: [
+                if (!isCreating)
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text("OK"),
+                  ),
+              ],
+            );
+          },
+        );
+      },
+    );
+  }
+}
