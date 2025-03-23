@@ -1,25 +1,51 @@
-import 'package:fidefund/screens/main_screen.dart';
-import 'package:fidefund/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:fidefund/screens/auth/forgot_password_screen.dart'; // Updated import
-import 'package:fidefund/screens/auth/signup_screen.dart'; // Updated import
+import 'package:fidefund/screens/main_screen.dart';
+import 'package:fidefund/screens/auth/forgot_password_screen.dart';
+import 'package:fidefund/screens/auth/signup_screen.dart';
+import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/screens/charity_main_screen.dart'; // Import Charity Homepage
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  String selectedRole = "donor"; // Default selected role
+
+  Widget _buildToggleButton(
+    String text,
+    bool isSelected,
+    VoidCallback onPressed,
+  ) {
+    return Expanded(
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor:
+              isSelected ? AppColors.milkyWhite : Colors.grey.shade300,
+          foregroundColor: AppColors.darkBlue,
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: Text(text, style: const TextStyle(fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        // Apply a gradient background
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              AppColors.primaryBlue,
-              AppColors.darkBlue,
-            ], // Light to dark blue gradient
+            colors: [AppColors.primaryBlue, AppColors.darkBlue],
           ),
         ),
         child: Padding(
@@ -28,7 +54,6 @@ class LoginPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Greeting Text (Hello! Welcome to FideFund)
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -37,41 +62,58 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
-                      color: AppColors.milkyWhite, // Darker blue for contrast
+                      color: AppColors.milkyWhite,
                     ),
                   ),
                   Text(
                     "Welcome to FideFund!",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: AppColors.milkyWhite, // Matching color tone
-                    ),
+                    style: TextStyle(fontSize: 18, color: AppColors.milkyWhite),
                   ),
-                  SizedBox(height: 80), // Add spacing before the login section
+                  SizedBox(height: 60),
                 ],
               ),
 
               // Login Section
               const Text(
-                "Login",
+                "Login as...?",
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: AppColors.milkyWhite,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox(height: 30),
 
+              //Toggle button
+              // 🔹 Role Selection (Toggle Button)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildToggleButton("Donor", selectedRole == "donor", () {
+                    setState(() {
+                      selectedRole = "donor";
+                    });
+                  }),
+                  const SizedBox(width: 10),
+                  _buildToggleButton("Charity", selectedRole == "charity", () {
+                    setState(() {
+                      selectedRole = "charity";
+                    });
+                  }),
+                ],
+              ),
+
+              const SizedBox(height: 30),
               // Email TextField
               TextField(
                 decoration: InputDecoration(
                   labelText: "Email",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20), // Rounded border
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   prefixIcon: const Icon(Icons.email),
                   filled: true,
-                  fillColor: Colors.white, // White background for input field
+                  fillColor: Colors.white,
                 ),
                 keyboardType: TextInputType.emailAddress,
               ),
@@ -83,14 +125,15 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: "Password",
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20), // Rounded border
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   prefixIcon: const Icon(Icons.lock),
                   filled: true,
-                  fillColor: Colors.white, // White background for input field
+                  fillColor: Colors.white,
                 ),
-                keyboardType: TextInputType.emailAddress,
+                obscureText: true,
               ),
+
               const SizedBox(height: 10),
 
               // Forgot Password?
@@ -107,33 +150,34 @@ class LoginPage extends StatelessWidget {
                   },
                   child: const Text(
                     "Forgot password?",
-                    style: TextStyle(
-                      color: AppColors.milkyWhite,
-                      fontWeight: FontWeight.normal,
-                    ),
+                    style: TextStyle(color: AppColors.milkyWhite),
                   ),
                 ),
               ),
+
               const SizedBox(height: 20),
 
-              // Login Button
+              // Login Button with Role-Based Navigation
               ElevatedButton(
                 onPressed: () {
-                  // Temporary navigation to HomePage
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => Main()),
-                  );
+                  if (selectedRole == "donor") {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => Main()),
+                    );
+                  } else {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => CharityMain()),
+                    );
+                  }
                 },
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  backgroundColor: Color(
-                    0xFFF8F6E3,
-                  ), // Light color to stand out
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  backgroundColor: const Color(0xFFF8F6E3),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  // textStyle: const TextStyle(fontSize: 18, color: Colors.black),
                 ),
                 child: const Text(
                   "Login",
@@ -143,6 +187,7 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
+
               const SizedBox(height: 15),
 
               // Sign Up Button
@@ -156,10 +201,7 @@ class LoginPage extends StatelessWidget {
                   },
                   child: const Text(
                     "Don’t have an account? Sign up",
-                    style: TextStyle(
-                      color: AppColors.milkyWhite,
-                      fontWeight: FontWeight.normal,
-                    ),
+                    style: TextStyle(color: AppColors.milkyWhite),
                   ),
                 ),
               ),
