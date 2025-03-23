@@ -17,7 +17,7 @@ class Campaign {
   bool isActive;
   DateTime createdAt;
   String status;
-  List<Milestone> milestones; // Added milestone list
+  List<Milestone> milestones;
 
   Campaign({
     required this.id,
@@ -36,7 +36,7 @@ class Campaign {
     required this.isActive,
     required this.createdAt,
     required this.status,
-    this.milestones = const [], // Default to empty list
+    this.milestones = const [],
   });
 
   factory Campaign.empty() {
@@ -49,7 +49,7 @@ class Campaign {
       targetAmount: 0.0,
       raisedAmount: 0.0,
       donorCount: 0,
-      coverImage: "assets/default_image.png", // Provide a placeholder image
+      coverImage: "assets/default_image.png", 
       images: [],
       document: [],
       startDate: DateTime.now(),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/screens/donate/payment_screen.dart';
 import 'package:fidefund/models/campaign_model.dart';
 
 class PaymentPage extends StatefulWidget {
@@ -15,7 +14,7 @@ class PaymentPage extends StatefulWidget {
 class _PaymentPageState extends State<PaymentPage> {
   bool isCryptoSelected = true;
   bool isTnCChecked = false;
-  double btcRate = 384113.61; // Example rate
+  double btcRate = 384113.61;
   TextEditingController cryptoController = TextEditingController();
   TextEditingController myrController = TextEditingController();
 

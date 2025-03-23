@@ -1,8 +1,6 @@
 import 'package:fidefund/controllers/milestone_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
-import 'package:fidefund/models/milestone_model.dart';
 import 'package:fidefund/utils/app_images.dart';
-import 'package:fidefund/utils/date_time_helper.dart';
 
 class CampaignController {
   static List<Campaign> mockCampaigns = [

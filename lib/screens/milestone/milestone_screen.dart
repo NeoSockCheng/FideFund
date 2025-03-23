@@ -1,6 +1,5 @@
 import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
-import 'package:fidefund/models/milestone_model.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/widgets/impact_report_card.dart';
