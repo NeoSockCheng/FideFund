@@ -12,7 +12,7 @@ class TransactionPage extends StatelessWidget {
 
   // Calculate total amount
   double getTotalDonated() {
-    return transactions.fold(0, (sum, item) => sum + item.amount);
+    return transactions.fold(0, (sum, item) => sum + item.amountMYR);
   }
 
   @override
@@ -139,9 +139,19 @@ class TransactionPage extends StatelessWidget {
               ),
             ],
           ),
-          Text(
-            "${transaction.amount.toStringAsFixed(2)} ${transaction.currency}",
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "${transaction.amountMYR.toStringAsFixed(2)} MYR",
+                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+              if (transaction.amountCrypto != null)
+                Text(
+                  "≈ ${transaction.amountCrypto!.toStringAsFixed(6)} ${transaction.Cryptocurrency}",
+                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                ),
+            ],
           ),
         ],
       ),

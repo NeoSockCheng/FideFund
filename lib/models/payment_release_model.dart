@@ -1,23 +1,17 @@
-  class Transaction {
+class PaymentRelease {
   final String hash;
   final String campaignTitle;
-  final String senderAddress;
-  final String receiverAddress;
+  final String campaignImage;
   final double amountMYR;
-  double? amountCrypto;
-  String? Cryptocurrency;
   String? note;
   double status;
   final DateTime createdAt;
 
-  Transaction({
+  PaymentRelease({
     required this.hash,
     required this.campaignTitle,
-    required this.senderAddress,
-    required this.receiverAddress,
+    required this.campaignImage,
     required this.amountMYR,
-    this.amountCrypto,
-    this.Cryptocurrency,
     this.note,
     required this.status,
     required this.createdAt,
