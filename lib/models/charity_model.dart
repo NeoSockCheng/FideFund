@@ -14,6 +14,7 @@ class Charity {
   String? walletAddress;
   CharityVerification? verification;
   DateTime createdAt;
+  String about;
 
   Charity({
     required this.id,
@@ -29,6 +30,6 @@ class Charity {
     this.walletAddress,
     this.verification,
     required this.createdAt,
+    required this.about,
   });
-
 }

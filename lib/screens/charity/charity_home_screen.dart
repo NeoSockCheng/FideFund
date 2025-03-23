@@ -4,6 +4,7 @@ import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/widgets/charity_campaign_card.dart';
 import 'package:flutter/material.dart';
+import 'package:fidefund/screens/charity/charity_create_campaign.dart';
 
 class CharityHomePage extends StatelessWidget {
   CharityHomePage({Key? key}) : super(key: key);
@@ -75,6 +76,13 @@ class CharityHomePage extends StatelessWidget {
               child: GestureDetector(
                 onTap: () {
                   // TODO: Add navigation or action
+                  // Navigate to CharityCreateCampaignPage
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CharityCreateCampaignPage(),
+                    ),
+                  );
                 },
                 child: Container(
                   width: double.infinity,
