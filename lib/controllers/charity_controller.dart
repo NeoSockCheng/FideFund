@@ -157,4 +157,12 @@ class CharityController {
       return null;
     }
   }
+
+  static Charity getCharityById(String charityId) {
+    try {
+      return mockCharity.firstWhere((charity) => charity.id == charityId);
+    } catch (e) {
+      throw Exception('Charity with ID $charityId not found.');
+    }
+  }
 }
