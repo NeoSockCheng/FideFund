@@ -1,5 +1,6 @@
 import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
+import 'package:fidefund/screens/milestone/fund_allocation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/widgets/impact_report_card.dart';
@@ -87,7 +88,12 @@ class _MilestonePageState extends State<MilestonePage> {
   Widget _buildFundBreakdownButton() {
     return Center(
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => FundAllocationPage()),
+          );
+        },
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.darkBlue,
           padding: EdgeInsets.symmetric(vertical: 30, horizontal: 24),
