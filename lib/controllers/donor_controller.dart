@@ -1,9 +1,10 @@
+import 'package:fidefund/controllers/donation_controller.dart';
+import 'package:fidefund/models/donation_model.dart';
 import 'package:fidefund/models/donor_model.dart';
 import 'package:fidefund/utils/app_images.dart';
 import 'package:fidefund/utils/date_time_helper.dart';
 
 class DonorController {
-
   static List<Donor> mockDonors = [
     Donor(
       id: "donor_1",
@@ -131,7 +132,7 @@ class DonorController {
     try {
       return mockDonors.firstWhere((donor) => donor.id == userId).username;
     } catch (e) {
-      return "Username"; 
+      return "Username";
     }
   }
 
@@ -139,8 +140,24 @@ class DonorController {
     try {
       return mockDonors.firstWhere((donor) => donor.id == userId).profileImage;
     } catch (e) {
-      return null; 
+      return null;
     }
+  }
+
+  static List<Map<String, dynamic>> getDonorRank() {
+    List<Donation> topDonations = DonationController.getDonationsSortedByMyr();
+    Set<String> donorIds = {};
+    List<Map<String, dynamic>> rankedDonors = topDonations
+        .where((donation) => donorIds.add(donation.donorId)) // Ensures unique donors
+        .map((donation) {
+          return {
+            'username': getDonorUsername(donation.donorId),
+            'profileImage': getDonorImage(donation.donorId) ?? AppImages.imageUserSkeleton,
+            'amount': donation.myrRate,
+          };
+        }).toList();
+
+    return rankedDonors;
   }
 
 }

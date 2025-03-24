@@ -113,4 +113,9 @@ class DonationController {
     ),
   ];
 
+  static List<Donation> getDonationsSortedByMyr() {
+    mockDonation.sort((a, b) => (b.myrRate).compareTo(a.myrRate));
+    return mockDonation.take(10).toList();
+  }
+
 }
