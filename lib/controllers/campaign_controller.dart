@@ -225,4 +225,12 @@ class CampaignController {
       return "Charity Id";
     }
   }
+
+  static Campaign getCampaignById(String campaignId) {
+    try {
+      return mockCampaigns.firstWhere((campaign) => campaign.id == campaignId);
+    } catch (e) {
+      throw Exception('Charity with ID $campaignId not found.');
+    }
+  }
 }
