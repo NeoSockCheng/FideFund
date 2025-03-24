@@ -191,7 +191,7 @@ class MilestoneController {
       coverImage: AppImages.imageMilestoneFlood,
       image: [AppImages.imageMilestoneFlood, AppImages.imageMilestoneFlood1, 
         AppImages.imageMilestoneFlood2, AppImages.imageMilestoneFlood3, AppImages.imageMilestoneFlood4],
-      document: [],
+      document: [AppImages.imageTransaction],
       createdAt: DateTime(2025, 2, 7),
     ),
   ];

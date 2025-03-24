@@ -121,7 +121,7 @@ class MilestoneDetailsPage extends StatelessWidget {
             Text("Financial Proof", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
             SingleChildScrollView(
-              scrollDirection: Axis.horizontal, // Enables horizontal scrolling
+              scrollDirection: Axis.horizontal,
               child: Row(
                 children: report.milestones
                     .expand((milestone) => milestone.document ?? []) 
@@ -214,14 +214,10 @@ class MilestoneDetailsPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 5)],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.receipt_long, size: 40, color: AppColors.darkBlue),
-            SizedBox(height: 8),
-            Text(proofTitle, style: TextStyle(fontSize: 12, color: Colors.grey[700])),
-          ],
-        ),
+        child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.asset(proofTitle, width: 150, height: 160, fit: BoxFit.cover),
+      ),
       ),
     );
   }
