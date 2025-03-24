@@ -14,4 +14,5 @@ class AppColors {
   static const Color milkyWhite = Color(0xFFF8F6E3);
   static const Color green = Color(0xFF69BF7C);
   static const Color orange = Color(0xFFF6B44A);
+  static const Color red = Color(0xFFF6584A);
 }

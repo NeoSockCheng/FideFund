@@ -48,6 +48,8 @@ class AppImages {
       'assets/images/user_profile/image_skeleton.png';
 
   //milestone photos
+  static const String imageTransaction = 
+      'assets/images/milestone/transaction.png'; 
   static const String imageMilestoneFlood = 
       'assets/images/milestone/flood.png'; 
   static const String imageMilestoneFlood1 = 
