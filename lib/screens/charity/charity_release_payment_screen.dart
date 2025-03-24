@@ -19,14 +19,9 @@ class CharityPaymentReleasePage extends StatelessWidget {
     double totalAmount = getTotalReceived();
 
     return Scaffold(
-      backgroundColor: AppColors.primaryBlue,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
+        backgroundColor: Colors.transparent,        
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 35),
@@ -67,7 +62,7 @@ class CharityPaymentReleasePage extends StatelessWidget {
                       radius: 110,
                     ),
                     PieChartSectionData(
-                      color: AppColors.secondaryBlue,
+                      color: AppColors.primaryBlue,
                       value: 25,
                       title: "25%\nProject 1",
                       titleStyle: const TextStyle(fontSize: 14, color: Colors.black, fontWeight: FontWeight.bold),
