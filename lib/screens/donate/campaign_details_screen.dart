@@ -4,17 +4,21 @@ import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/widgets/milestone_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/models/campaign_model.dart';
+import 'package:fidefund/screens/donate/charity_detail_screen.dart';
 
 class CampaignDetailsPage extends StatelessWidget {
   final Campaign campaign;
 
-  const CampaignDetailsPage({Key? key, required this.campaign}) : super(key: key);
+  const CampaignDetailsPage({Key? key, required this.campaign})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     int remainingDays = campaign.endDate.difference(DateTime.now()).inDays;
     String charityName = CharityController.getCharityName(campaign.charityId);
-    String? charityImage = CharityController.getCharityImage(campaign.charityId);
+    String? charityImage = CharityController.getCharityImage(
+      campaign.charityId,
+    );
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -29,7 +33,9 @@ class CampaignDetailsPage extends StatelessWidget {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 80), // Leave space for the button
+            padding: const EdgeInsets.only(
+              bottom: 80,
+            ), // Leave space for the button
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,29 +59,44 @@ class CampaignDetailsPage extends StatelessWidget {
                       children: [
                         Text(
                           campaign.category.toUpperCase(),
-                          style: const TextStyle(fontSize: 14, color: Colors.blueGrey),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.blueGrey,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           campaign.title,
-                          style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Row(
                           children: [
                             Text(
                               "${campaign.raisedAmount.toStringAsFixed(0)} BTC",
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(width: 10),
                             Text(
                               "raised of ${campaign.targetAmount.toStringAsFixed(0)} BTC",
-                              style: const TextStyle(fontSize: 14, color: Colors.grey),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
                             ),
                             const Spacer(),
                             Text(
                               "$remainingDays days left",
-                              style: const TextStyle(fontSize: 14, color: Colors.redAccent),
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.redAccent,
+                              ),
                             ),
                           ],
                         ),
@@ -83,7 +104,8 @@ class CampaignDetailsPage extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: LinearProgressIndicator(
-                            value: campaign.raisedAmount / campaign.targetAmount,
+                            value:
+                                campaign.raisedAmount / campaign.targetAmount,
                             minHeight: 8,
                             backgroundColor: AppColors.lightGrey,
                             color: AppColors.darkBlue,
@@ -92,11 +114,30 @@ class CampaignDetailsPage extends StatelessWidget {
                         const SizedBox(height: 16),
                         Row(
                           children: [
-                            CircleAvatar(
-                              backgroundImage: charityImage != null
-                                  ? NetworkImage(charityImage)
-                                  : const AssetImage('assets/images/default_charity.png') as ImageProvider,
-                              radius: 20,
+                            MouseRegion(
+                              cursor:
+                                  SystemMouseCursors
+                                      .click, // Change cursor to pointer
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CharityDetailPage(),
+                                    ),
+                                  );
+                                },
+                                child: CircleAvatar(
+                                  backgroundImage:
+                                      charityImage != null
+                                          ? NetworkImage(charityImage)
+                                          : const AssetImage(
+                                                'assets/images/default_charity.png',
+                                              )
+                                              as ImageProvider,
+                                  radius: 20,
+                                ),
+                              ),
                             ),
                             const SizedBox(width: 10),
                             Column(
@@ -104,25 +145,38 @@ class CampaignDetailsPage extends StatelessWidget {
                               children: [
                                 Text(
                                   charityName,
-                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                                 Text(
                                   "Organizer",
-                                  style: TextStyle(fontSize: 12, color: Colors.grey.shade600),
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey.shade600,
+                                  ),
                                 ),
                               ],
                             ),
                           ],
                         ),
+
                         const SizedBox(height: 16),
                         const Text(
                           "About",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           campaign.description,
-                          style: const TextStyle(fontSize: 14, color: Colors.black87),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87,
+                          ),
                         ),
                         const SizedBox(height: 16),
                         _buildMilestonesSection(),
@@ -146,7 +200,7 @@ class CampaignDetailsPage extends StatelessWidget {
                     color: Colors.black12,
                     blurRadius: 10,
                     spreadRadius: 2,
-                    offset: Offset(0, -2), 
+                    offset: Offset(0, -2),
                   ),
                 ],
               ),
@@ -154,24 +208,31 @@ class CampaignDetailsPage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: campaign.raisedAmount >= campaign.targetAmount
-                        ? Colors.grey
-                        : AppColors.darkBlue,
+                    backgroundColor:
+                        campaign.raisedAmount >= campaign.targetAmount
+                            ? Colors.grey
+                            : AppColors.darkBlue,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: campaign.raisedAmount >= campaign.targetAmount
-                      ? null
-                      : () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => PaymentPage(report: campaign)),
-                          );
-                        },
+                  onPressed:
+                      campaign.raisedAmount >= campaign.targetAmount
+                          ? null
+                          : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => PaymentPage(report: campaign),
+                              ),
+                            );
+                          },
                   child: Text(
-                    campaign.raisedAmount >= campaign.targetAmount ? "Goal Reached" : "Donate Now",
+                    campaign.raisedAmount >= campaign.targetAmount
+                        ? "Goal Reached"
+                        : "Donate Now",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -188,17 +249,16 @@ class CampaignDetailsPage extends StatelessWidget {
   }
 
   Widget _buildMilestonesSection() {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const Text(
-        "Milestones",
-        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      ),
-      const SizedBox(height: 8),
-      MilestoneCard(milestones: campaign.milestones),
-    ],
-  );
-}
-
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Milestones",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        MilestoneCard(milestones: campaign.milestones),
+      ],
+    );
+  }
 }

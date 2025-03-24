@@ -4,10 +4,10 @@ import 'package:fidefund/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/models/charity_model.dart';
-import 'package:fidefund/widgets/charity_campaign_card.dart';
+import 'package:fidefund/widgets/campaign_card.dart';
 
-class CharityUpdateProfilePage extends StatelessWidget {
-  CharityUpdateProfilePage({Key? key}) : super(key: key);
+class CharityDetailPage extends StatelessWidget {
+  CharityDetailPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class CharityUpdateProfilePage extends StatelessWidget {
         title: Padding(
           padding: const EdgeInsets.only(right: 20.0),
           child: Text(
-            "Update Profile",
+            "Charity Details",
             style: TextStyle(
               color: AppColors.darkBlue,
               fontSize: 20, // Adjust text size
@@ -33,14 +33,6 @@ class CharityUpdateProfilePage extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.edit),
-            onPressed: () {
-              // Add edit functionality here
-            },
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
@@ -154,7 +146,7 @@ class CharityUpdateProfilePage extends StatelessWidget {
             ),
 
             // Display the CampaignCard for a single campaign
-            CharityCampaignCard(campaign: campaign),
+            CampaignCard(campaign: campaign),
           ],
         ),
       ),
