@@ -1,7 +1,6 @@
 import 'package:fidefund/controllers/donation_controller.dart';
 import 'package:fidefund/screens/real_time/real_time_all_donations/real_time_all_donations_item.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/widgets/app_bar.dart';
 import 'package:fidefund/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/models/donation_model.dart';

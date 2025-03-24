@@ -7,6 +7,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showBackButton;
   final List<Widget>? actions;
   final Color backgroundColor;
+  final bool showShadow;
+  final bool centerTitle;
+  final Color fontColor;
 
   const CustomAppBar({
     Key? key,
@@ -14,6 +17,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackButton = false,
     this.actions,
     this.backgroundColor = AppColors.secondaryBlue,
+    this.fontColor = AppColors.black,
+    this.showShadow = true,
+    this.centerTitle = false,
   }) : super(key: key);
 
   @override
@@ -21,12 +27,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(
         title,
-        style: AppTypography.bodyLarge.copyWith(color: AppColors.black),
+        style: AppTypography.bodyLarge.copyWith(color: fontColor),
       ),
-      centerTitle: false,
-      elevation: 6,
-      shadowColor: Colors.black.withAlpha(70), // Use `withAlpha()` instead
-      backgroundColor: backgroundColor, // Ensure it takes the right color
+      centerTitle: centerTitle,
+      backgroundColor: backgroundColor,
+      elevation: showShadow ? 6 : 0, 
+      shadowColor: showShadow ? Colors.black.withAlpha(70) : Colors.transparent,
       leading: showBackButton
           ? IconButton(
               icon: const Icon(Icons.arrow_back, color: Colors.black),

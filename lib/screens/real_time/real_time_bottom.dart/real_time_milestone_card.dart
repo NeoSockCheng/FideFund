@@ -1,4 +1,3 @@
-import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/controllers/charity_controller.dart';
 import 'package:fidefund/controllers/milestone_controller.dart';
 import 'package:fidefund/models/milestone_model.dart';
