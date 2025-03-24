@@ -12,6 +12,8 @@ class CharityCreateCampaignPage extends StatefulWidget {
 class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
   final _formKey = GlobalKey<FormState>();
   bool isCreating = true;
+  List<TextEditingController> milestoneNameControllers = [];
+  List<TextEditingController> milestoneAmountControllers = [];
 
   TextEditingController titleController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
@@ -30,6 +32,25 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
         uploadedFiles[key] = result.files.single.name;
       });
     }
+  }
+
+  //Initialize the First Milestone
+  @override
+  void initState() {
+    super.initState();
+    addMilestone(); // Start with one milestone field
+  }
+
+  //Dispose Controllers to Prevent Memory Leaks
+  @override
+  void dispose() {
+    for (var controller in milestoneNameControllers) {
+      controller.dispose();
+    }
+    for (var controller in milestoneAmountControllers) {
+      controller.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -58,12 +79,69 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
               SizedBox(height: 20),
 
               buildTextField("Campaign Title", titleController),
+              const SizedBox(height: 12),
               buildTextField("Category", categoryController),
+              const SizedBox(height: 12),
               buildTextField("About", aboutController, maxLines: 4),
+              const SizedBox(height: 12),
               buildTextField("Goal of Campaign", goalController),
-              buildTextField("Milestone", milestoneController),
+              const SizedBox(height: 12),
 
-              SizedBox(height: 16),
+              //build milestone
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Campaign Milestones",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  SizedBox(height: 8),
+                  Column(
+                    children: List.generate(milestoneNameControllers.length, (
+                      index,
+                    ) {
+                      return Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: Row(
+                          children: [
+                            // Milestone Name Field
+                            Expanded(
+                              flex: 3,
+                              child: buildTextField(
+                                "Milestone ${index + 1}",
+                                milestoneNameControllers[index],
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            // Amount Field
+                            Expanded(
+                              flex: 1,
+                              child: buildTextField(
+                                "Amount",
+                                milestoneAmountControllers[index],
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            // Add/Remove Buttons
+                            if (index == milestoneNameControllers.length - 1 &&
+                                milestoneNameControllers.length < 3)
+                              IconButton(
+                                icon: Icon(Icons.add, color: AppColors.green),
+                                onPressed: addMilestone,
+                              )
+                            else if (milestoneNameControllers.length > 1)
+                              IconButton(
+                                icon: Icon(Icons.remove, color: AppColors.red),
+                                onPressed: () => removeMilestone(index),
+                              ),
+                          ],
+                        ),
+                      );
+                    }),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12),
               Text(
                 "Campaign Period",
                 style: TextStyle(fontWeight: FontWeight.bold),
@@ -74,18 +152,21 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
                   Expanded(
                     child: buildTextField("Start Date", startDateController),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 20),
                   Expanded(
                     child: buildTextField("End Date", endDateController),
                   ),
                 ],
               ),
+              SizedBox(height: 12),
 
               _buildFileUploadField("Upload Registration Certificate"),
+              const SizedBox(height: 12),
               _buildFileUploadField("Upload Representative's ID"),
+              const SizedBox(height: 12),
               _buildFileUploadField("Upload Proof of Authorization"),
 
-              SizedBox(height: 20),
+              SizedBox(height: 50),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -196,12 +277,12 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
           ),
           child: Row(
             children: [
-              const Icon(Icons.upload_file, color: Colors.black),
+              const Icon(Icons.upload_file, color: AppColors.black),
               const SizedBox(width: 20),
               Expanded(
                 child: Text(
                   uploadedFiles[label] ?? label,
-                  style: const TextStyle(fontSize: 16, color: Colors.black),
+                  style: const TextStyle(fontSize: 16, color: AppColors.black),
                 ),
               ),
             ],
@@ -232,18 +313,28 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  isCreating
-                      ? CircularProgressIndicator()
-                      : Icon(Icons.check_circle, color: Colors.green, size: 50),
-                  SizedBox(height: 16),
-                  Text(
-                    isCreating ? "Creating..." : "Created Successfully!",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              content: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    isCreating
+                        ? CircularProgressIndicator()
+                        : Icon(
+                          Icons.check_circle,
+                          color: AppColors.green,
+                          size: 50,
+                        ),
+                    SizedBox(height: 16),
+                    Text(
+                      isCreating ? "Creating..." : "Created Successfully!",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               actions: [
                 if (!isCreating)
@@ -251,7 +342,13 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text("OK"),
+                    child: Text(
+                      "OK",
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        color: AppColors.darkBlue,
+                      ),
+                    ),
                   ),
               ],
             );
@@ -259,5 +356,23 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
         );
       },
     );
+  }
+
+  void addMilestone() {
+    if (milestoneNameControllers.length < 3) {
+      setState(() {
+        milestoneNameControllers.add(TextEditingController());
+        milestoneAmountControllers.add(TextEditingController());
+      });
+    }
+  }
+
+  void removeMilestone(int index) {
+    setState(() {
+      milestoneNameControllers[index].dispose();
+      milestoneAmountControllers[index].dispose();
+      milestoneNameControllers.removeAt(index);
+      milestoneAmountControllers.removeAt(index);
+    });
   }
 }

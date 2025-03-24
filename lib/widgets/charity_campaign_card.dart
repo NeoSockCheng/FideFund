@@ -1,6 +1,7 @@
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/screens/charity/charity_campaign_details_screen.dart';
+import 'package:fidefund/screens/charity/charity_create_impact_report.dart';
 import 'package:flutter/material.dart';
 
 class CharityCampaignCard extends StatelessWidget {
@@ -195,7 +196,12 @@ class CharityCampaignCard extends StatelessWidget {
                         //impact report button
                         OutlinedButton.icon(
                           onPressed: () {
-                            // Handle impact report action
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CreateImpactReportPage(),
+                              ),
+                            );
                           },
                           icon: Image.asset(
                             'assets/icons/icon_impact_report.png',
