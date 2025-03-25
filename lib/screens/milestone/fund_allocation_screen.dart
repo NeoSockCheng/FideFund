@@ -26,7 +26,7 @@ class FundAllocationPage extends StatelessWidget {
       backgroundColor: AppColors.primaryBlue,
       appBar: CustomAppBar(
         title: "Fund Allocation",
-        backgroundColor: AppColors.primaryBlue,
+        backgroundColor: Colors.transparent,
         showBackButton: true,
       ),
       body: Padding(
