@@ -37,7 +37,7 @@ class _MilestonePageState extends State<MilestonePage> {
             ),
             SizedBox(height: 10),
             _buildImpactReportsGrid(currentReports),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
             _buildPaginationControls(totalPages),
           ],
         ),
@@ -122,11 +122,11 @@ class _MilestonePageState extends State<MilestonePage> {
     return GridView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(), 
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 250, 
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
-        childAspectRatio: 0.85,
+        childAspectRatio: 0.6, 
       ),
       itemCount: currentReports.length,
       itemBuilder: (context, index) {

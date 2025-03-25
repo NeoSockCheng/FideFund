@@ -1,7 +1,3 @@
-import 'package:fidefund/models/campaign_model.dart';
-import 'package:fidefund/models/charity_model.dart';
-// import 'package:fidefund/controllers/charity_controller.dart';
-// import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/screens/auth/login_screen.dart';
@@ -138,7 +134,7 @@ class CharityProfilePage extends StatelessWidget {
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
-      (Route<dynamic> route) => false, // Removes all previous routes
+      (Route<dynamic> route) => false, 
     );
   }
 }

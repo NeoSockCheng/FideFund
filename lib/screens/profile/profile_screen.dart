@@ -1,6 +1,6 @@
 import 'package:fidefund/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:fidefund/screens/auth/login_screen.dart'; // Ensure this file exists and is correctly implemented
+import 'package:fidefund/screens/auth/login_screen.dart'; 
 
 class ProfilePage extends StatelessWidget {
   @override

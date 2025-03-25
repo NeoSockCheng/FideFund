@@ -57,7 +57,7 @@ class _SignupPageState extends State<SignupPage> {
                   padding: const EdgeInsets.only(
                     top: 20,
                     left: 10,
-                  ), // Adjust values as needed
+                  ), 
                   child: Row(
                     children: [
                       IconButton(
@@ -224,7 +224,7 @@ class _SignupPageState extends State<SignupPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   isVerifying
-                      ? const CircularProgressIndicator() // Show loading
+                      ? const CircularProgressIndicator() 
                       : const Icon(
                         Icons.check_circle,
                         color: Colors.green,
@@ -256,7 +256,7 @@ class _SignupPageState extends State<SignupPage> {
         isVerifying = false;
         isVerified = true;
       });
-      Navigator.of(context).pop(); // Close popup
+      Navigator.of(context).pop(); 
     });
   }
 
@@ -315,7 +315,6 @@ class _SignupPageState extends State<SignupPage> {
       onPressed:
           onPressed ??
           () {
-            // Navigate back to the login screen
             Navigator.pop(context);
           },
       style: ElevatedButton.styleFrom(

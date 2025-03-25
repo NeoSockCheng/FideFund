@@ -1,6 +1,7 @@
 import 'package:fidefund/controllers/donation_controller.dart';
 import 'package:fidefund/screens/real_time/real_time_all_donations/real_time_all_donations_item.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/widgets/app_bar.dart';
 import 'package:fidefund/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/models/donation_model.dart';
@@ -37,29 +38,15 @@ class _RealTimeAllDonationsState extends State<RealTimeAllDonations> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: "All Donations",
+        backgroundColor: AppColors.darkBlue,
+        showBackButton: true,
+        fontColor: AppColors.secondaryBlue,
+      ),
       backgroundColor: AppColors.darkBlue,
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 16, right: 16),
-            child: Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () => Navigator.pop(context),
-                ),
-                const SizedBox(width: 8),
-                const Text(
-                  'All Donations',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: SearchBarWidget(

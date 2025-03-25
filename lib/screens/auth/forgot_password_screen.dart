@@ -13,20 +13,20 @@ class ForgotPasswordPage extends StatelessWidget {
             colors: [
               AppColors.primaryBlue,
               AppColors.darkBlue,
-            ], // Gradient Colors
+            ], 
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
         ),
         child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // Align left
+            crossAxisAlignment: CrossAxisAlignment.start, 
             children: [
               // Top bar with back button and title
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 15.0, // Reduced horizontal padding for top bar
-                  vertical: 10.0, // Small vertical padding
+                  horizontal: 15.0, 
+                  vertical: 10.0,
                 ),
                 child: Row(
                   children: [
@@ -36,11 +36,11 @@ class ForgotPasswordPage extends StatelessWidget {
                         Navigator.pop(context);
                       },
                     ),
-                    const SizedBox(width: 8), // Small space
+                    const SizedBox(width: 8), 
                     const Text(
                       "Forgot Password",
                       style: TextStyle(
-                        fontSize: 18, // Smaller size
+                        fontSize: 18, 
                         fontWeight: FontWeight.bold,
                         color: AppColors.milkyWhite,
                       ),
@@ -49,20 +49,20 @@ class ForgotPasswordPage extends StatelessWidget {
                 ),
               ),
 
-              const SizedBox(height: 20), // Space between top bar and content
+              const SizedBox(height: 20), 
               // Main content with wider padding
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 40.0, // Wider padding for main content
+                    horizontal: 40.0, 
                   ),
                   child: Column(
                     children: [
                       // Image above the text
                       Center(
                         child: Image.asset(
-                          'assets/images/forgot_password.png', // Replace with your image asset
-                          height: 300, // Adjust size
+                          'assets/images/forgot_password.png', 
+                          height: 300, 
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -93,7 +93,7 @@ class ForgotPasswordPage extends StatelessWidget {
                           prefixIcon: const Icon(Icons.email),
                           filled: true,
                           fillColor:
-                              Colors.white, // White background for input field
+                              Colors.white, 
                         ),
                         keyboardType: TextInputType.emailAddress,
                       ),

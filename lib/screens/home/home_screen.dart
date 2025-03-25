@@ -26,10 +26,10 @@ class HomePage extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1), // Light shadow
-                    blurRadius: 10, // Soft blur effect
-                    spreadRadius: 2, // Slightly spread the shadow
-                    offset: Offset(0, 4), // Moves the shadow down
+                    color: Colors.black.withOpacity(0.1), 
+                    blurRadius: 10, 
+                    spreadRadius: 2, 
+                    offset: Offset(0, 4), 
                   ),
                 ],
               ),

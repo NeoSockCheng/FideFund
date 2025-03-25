@@ -394,7 +394,7 @@ class MilestoneController {
       raisedAmount: 0,
       targetAmount: 0,
       isComplete: true,
-      coverImage: "", // Add relevant image if needed
+      coverImage: "", 
       createdAt: DateTime.now(),
     ),
     Milestone(
@@ -433,7 +433,7 @@ class MilestoneController {
       raisedAmount: 0,
       targetAmount: 0,
       isComplete: true,
-      coverImage: "", // Add relevant image if needed
+      coverImage: "", 
       createdAt: DateTime.now(),
     ),
     Milestone(
@@ -472,7 +472,7 @@ class MilestoneController {
       raisedAmount: 0,
       targetAmount: 0,
       isComplete: true,
-      coverImage: "", // Add relevant image if needed
+      coverImage: "", 
       createdAt: DateTime.now(),
     ),
     Milestone(

@@ -26,24 +26,23 @@ class MilestoneDetailsPage extends StatelessWidget {
         centerTitle: false,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Project Title & Category
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(
-                  child: Text(
-                    report.title,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
+                Text(
+                  report.title,
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(width: 30),
+                SizedBox(height: 8),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                   decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.darkBlue), // Border only
+                    border: Border.all(color: AppColors.darkBlue), 
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(

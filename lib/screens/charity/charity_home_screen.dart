@@ -27,10 +27,10 @@ class CharityHomePage extends StatelessWidget {
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1), // Light shadow
-                    blurRadius: 10, // Soft blur effect
-                    spreadRadius: 2, // Slightly spread the shadow
-                    offset: Offset(0, 4), // Moves the shadow down
+                    color: Colors.black.withOpacity(0.1), 
+                    blurRadius: 10, 
+                    spreadRadius: 2, 
+                    offset: Offset(0, 4), 
                   ),
                 ],
               ),
@@ -88,7 +88,7 @@ class CharityHomePage extends StatelessWidget {
                   width: double.infinity,
                   padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
                   decoration: BoxDecoration(
-                    color: Color(0xFF41798E), // Teal Blue Color
+                    color: Color(0xFF41798E), 
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Row(
@@ -114,7 +114,7 @@ class CharityHomePage extends StatelessWidget {
                                 child: Icon(
                                   Icons.chevron_right,
                                   color: Colors.white,
-                                  size: 18,
+                                  size: 16,
                                 ),
                               ),
                             ),
@@ -124,8 +124,8 @@ class CharityHomePage extends StatelessWidget {
                       Icon(
                         Icons.favorite_border,
                         color: Color(0xFFE14D94),
-                        size: 50,
-                      ), // Pink Heart Icon
+                        size: 45,
+                      ), 
                     ],
                   ),
                 ),

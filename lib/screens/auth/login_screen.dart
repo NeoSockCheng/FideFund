@@ -3,7 +3,7 @@ import 'package:fidefund/screens/main_screen.dart';
 import 'package:fidefund/screens/auth/forgot_password_screen.dart';
 import 'package:fidefund/screens/auth/signup_screen.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/screens/charity_main_screen.dart'; // Import Charity Homepage
+import 'package:fidefund/screens/charity_main_screen.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -13,7 +13,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String selectedRole = "donor"; // Default selected role
+  String selectedRole = "donor";
 
   Widget _buildToggleButton(
     String text,
