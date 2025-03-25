@@ -9,21 +9,27 @@ class MilestoneCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Continuous vertical line
-        Positioned(
-          left: 27, // Center of the circle (24/2 + some padding)
-          top: 12,
-          bottom: 12,
-          child: Container(
-            width: 2,
-            color: AppColors.grey,
-          ),
-        ),
-        Column(
-          children: milestones.map((milestone) {
-            return Padding(
+    return Column(
+      children: milestones.asMap().entries.map((entry) {
+        final int index = entry.key;
+        final Milestone milestone = entry.value;
+        final bool isLast = index == milestones.length - 1;
+
+        return Stack(
+          children: [
+            if (!isLast)
+              // line for milestone
+              Positioned(
+                left: 27,
+                top: 12,
+                bottom: 0,
+                child: Container(
+                  width: 2,
+                  height: 100,
+                  color: AppColors.grey,
+                ),
+              ),
+            Padding(
               padding: const EdgeInsets.only(bottom: 16.0, left: 16, right: 16),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,10 +71,10 @@ class MilestoneCard extends StatelessWidget {
                   ),
                 ],
               ),
-            );
-          }).toList(),
-        ),
-      ],
+            ),
+          ],
+        );
+      }).toList(),
     );
   }
 }

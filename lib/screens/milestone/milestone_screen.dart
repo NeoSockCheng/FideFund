@@ -1,6 +1,7 @@
 import 'package:fidefund/controllers/campaign_controller.dart';
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/screens/milestone/fund_allocation_screen.dart';
+import 'package:fidefund/screens/leaderboard/leaderboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/widgets/impact_report_card.dart';
@@ -29,7 +30,7 @@ class _MilestonePageState extends State<MilestonePage> {
           children: [
             _buildImpactSummary(),
             SizedBox(height: 30),
-            _buildFundBreakdownButton(),
+            _buildActionButtons(),
             SizedBox(height: 30),
             Text(
               "Latest Impact Reports",
@@ -84,19 +85,67 @@ class _MilestonePageState extends State<MilestonePage> {
     );
   }
 
+  /// Leaderboard & Fund Breakdown Button Wrapper
+  Widget _buildActionButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30), 
+            child: _buildLeaderboardButton(),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30),
+            child: _buildFundBreakdownButton(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Leaderboard Button
+  Widget _buildLeaderboardButton() {
+    return _buildEqualSizeButton(
+      icon: Icons.leaderboard,
+      label: "Donors Leaderboard",
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LeaderboardScreen()),
+        );
+      },
+    );
+  }
+
   /// Fund Breakdown Button
   Widget _buildFundBreakdownButton() {
-    return Center(
+    return _buildEqualSizeButton(
+      icon: Icons.pie_chart,
+      label: "Fund Allocation Breakdown",
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => FundAllocationPage()),
+        );
+      },
+    );
+  }
+
+  /// Generic Button with Equal Size
+  Widget _buildEqualSizeButton({
+    required IconData icon,
+    required String label,
+    required VoidCallback onPressed,
+  }) {
+    return IntrinsicHeight(
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => FundAllocationPage()),
-          );
-        },
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.darkBlue,
-          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 24),
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -104,18 +153,21 @@ class _MilestonePageState extends State<MilestonePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.pie_chart, color: AppColors.yellow, size: 45),
+            Icon(icon, color: AppColors.yellow, size: 45),
             SizedBox(height: 8),
             Text(
-              "Fund Allocation Breakdown",
+              label,
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),
       ),
     );
   }
+
 
   /// Impact Reports GridView
   Widget _buildImpactReportsGrid(List<Campaign> currentReports) {

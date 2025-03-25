@@ -1,6 +1,5 @@
 import 'package:fidefund/screens/donate/donate_screen.dart';
 import 'package:fidefund/screens/home/home_screen.dart';
-import 'package:fidefund/screens/leaderboard/leaderboard_screen.dart';
 import 'package:fidefund/screens/milestone/milestone_screen.dart';
 import 'package:fidefund/screens/profile/profile_screen.dart';
 import 'package:fidefund/screens/real_time/real_time_screen.dart';
@@ -23,7 +22,6 @@ class _MainState extends State<Main> {
     HomePage(),
     DonatePage(),
     RealTimePage(),
-    LeaderboardScreen(),
     MilestonePage(),
     ProfilePage(),
   ];
@@ -47,7 +45,7 @@ class _MainState extends State<Main> {
   }
 
   bool _shouldShowAppBar() {
-    return _currentIndex > 0 && _currentIndex < 5 && _currentIndex != 3;
+    return _currentIndex > 0 && _currentIndex < 4;
   }
 }
 
