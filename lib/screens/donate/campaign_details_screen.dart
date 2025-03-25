@@ -1,6 +1,7 @@
 import 'package:fidefund/controllers/charity_controller.dart';
 import 'package:fidefund/screens/donate/payment_screen.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/utils/app_images.dart';
 import 'package:fidefund/widgets/milestone_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/models/campaign_model.dart';
@@ -35,7 +36,7 @@ class CampaignDetailsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               bottom: 80,
-            ), // Leave space for the button
+            ),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,10 +46,10 @@ class CampaignDetailsPage extends StatelessWidget {
                       bottomLeft: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                     ),
-                    child: Image.network(
-                      campaign.coverImage,
+                    child: Image(
+                      image: AssetImage(campaign.coverImage),
                       width: double.infinity,
-                      height: 500,
+                      height: 250,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -130,9 +131,9 @@ class CampaignDetailsPage extends StatelessWidget {
                                 child: CircleAvatar(
                                   backgroundImage:
                                       charityImage != null
-                                          ? NetworkImage(charityImage)
+                                          ? AssetImage(charityImage)
                                           : const AssetImage(
-                                                'assets/images/default_charity.png',
+                                                AppImages.image_placeholder,
                                               )
                                               as ImageProvider,
                                   radius: 20,
@@ -140,24 +141,28 @@ class CampaignDetailsPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  charityName,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    charityName,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
                                   ),
-                                ),
-                                Text(
-                                  "Organizer",
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.grey.shade600,
+                                  Text(
+                                    "Organizer",
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.grey.shade600,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),

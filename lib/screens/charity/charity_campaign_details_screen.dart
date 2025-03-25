@@ -1,6 +1,7 @@
 import 'package:fidefund/controllers/charity_controller.dart';
 import 'package:fidefund/screens/donate/payment_screen.dart';
 import 'package:fidefund/theme/colors.dart';
+import 'package:fidefund/utils/app_images.dart';
 import 'package:fidefund/widgets/milestone_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fidefund/models/campaign_model.dart';
@@ -34,7 +35,7 @@ class CharityCampaignDetailsPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               bottom: 20,
-            ), // Leave space for the button
+            ), 
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,10 +45,10 @@ class CharityCampaignDetailsPage extends StatelessWidget {
                       bottomLeft: Radius.circular(12),
                       bottomRight: Radius.circular(12),
                     ),
-                    child: Image.network(
+                    child: Image.asset(
                       campaign.coverImage,
                       width: double.infinity,
-                      height: 500,
+                      height: 250,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -70,6 +71,8 @@ class CharityCampaignDetailsPage extends StatelessWidget {
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
                           ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
                         ),
                         const SizedBox(height: 8),
                         Row(
@@ -116,9 +119,9 @@ class CharityCampaignDetailsPage extends StatelessWidget {
                             CircleAvatar(
                               backgroundImage:
                                   charityImage != null
-                                      ? NetworkImage(charityImage)
+                                      ? AssetImage(charityImage)
                                       : const AssetImage(
-                                            'assets/images/default_charity.png',
+                                            AppImages.image_placeholder,
                                           )
                                           as ImageProvider,
                               radius: 20,
@@ -127,11 +130,16 @@ class CharityCampaignDetailsPage extends StatelessWidget {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  charityName,
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width * 0.7,
+                                  child: Text(
+                                    charityName,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
                                   ),
                                 ),
                                 Text(

@@ -38,7 +38,7 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
   @override
   void initState() {
     super.initState();
-    addMilestone(); // Start with one milestone field
+    addMilestone(); 
   }
 
   //Dispose Controllers to Prevent Memory Leaks
@@ -271,9 +271,9 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
             border: Border.all(
               color: AppColors.secondaryBlue,
               width: 1.5,
-            ), // Border color updated
+            ), 
             borderRadius: BorderRadius.circular(10),
-            color: AppColors.secondaryBlue, // Background color updated
+            color: AppColors.secondaryBlue, 
           ),
           child: Row(
             children: [
@@ -299,13 +299,13 @@ class _CharityCreateCampaignPageState extends State<CharityCreateCampaignPage> {
 
     showDialog(
       context: context,
-      barrierDismissible: false, // Prevent dismissing dialog
+      barrierDismissible: false, 
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
             Future.delayed(Duration(seconds: 2), () {
               setState(() {
-                isCreating = false; // Change state after delay
+                isCreating = false; 
               });
             });
 

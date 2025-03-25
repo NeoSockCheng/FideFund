@@ -37,8 +37,10 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+Widget build(BuildContext context) {
+  return GestureDetector(
+    onTap: () => FocusScope.of(context).unfocus(), 
+    child: Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -52,109 +54,124 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 35),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Donate To",
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              widget.report.title, // Extracting report title dynamically
-              style: TextStyle(fontSize: 20, color: AppColors.black),
-            ),
-            SizedBox(height: 20),
-
-            // Payment method toggle
-            Row(
-              children: [
-                _buildPaymentMethodButton(
-                  icon: Image.asset('assets/icons/payment/binance.png', height: 30),
-                  label: "Binance Pay",
-                  isSelected: isCryptoSelected,
-                  onPressed: () => setState(() => isCryptoSelected = true),
-                ),
-                SizedBox(width: 10),
-                _buildPaymentMethodButton(
-                  icon: Icon(Icons.credit_card, size: 30),
-                  label: "Credit/Debit Card",
-                  isSelected: !isCryptoSelected,
-                  onPressed: () => setState(() => isCryptoSelected = false),
-                ),
-              ],
-            ),
-            SizedBox(height: 30),
-            isCryptoSelected ? _buildCryptoForm() : _buildCardForm(),
-            SizedBox(height: 40),
-            // Terms and Continue button
-          Row(
+      body: SingleChildScrollView(
+        physics: AlwaysScrollableScrollPhysics(), 
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 35),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    isTnCChecked = !isTnCChecked;
-                  });
-                },
-                child: Icon(
-                  isTnCChecked ? Icons.check_circle : Icons.circle_outlined,
-                  color: AppColors.darkBlue,
-                  size: 20,
-                ),
+              Text(
+                "Donate To",
+                style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
               ),
-              SizedBox(width: 8),
-              Expanded(
-                child: Text(
-                  "By proceeding the donation, you agree with our Terms of Use and Privacy Policy.",
-                  style: TextStyle(fontSize: 12, color: Colors.grey[700]),
-                ),
+              Text(
+                widget.report.title,
+                style: TextStyle(fontSize: 20, color: AppColors.black),
               ),
+              SizedBox(height: 20),
+
+              // Payment method toggle
+              Row(
+                children: [
+                  _buildPaymentMethodButton(
+                    icon: Image.asset('assets/icons/payment/binance.png', height: 30),
+                    label: "Binance Pay",
+                    isSelected: isCryptoSelected,
+                    onPressed: () => setState(() => isCryptoSelected = true),
+                  ),
+                  SizedBox(width: 10),
+                  _buildPaymentMethodButton(
+                    icon: Icon(Icons.credit_card, size: 30),
+                    label: "Credit/Debit Card",
+                    isSelected: !isCryptoSelected,
+                    onPressed: () => setState(() => isCryptoSelected = false),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30),
+              isCryptoSelected ? _buildCryptoForm() : _buildCardForm(),
+              SizedBox(height: 40),
+              // Terms and Continue button
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isTnCChecked = !isTnCChecked;
+                      });
+                    },
+                    child: Icon(
+                      isTnCChecked ? Icons.check_circle : Icons.circle_outlined,
+                      color: AppColors.darkBlue,
+                      size: 20,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      "By proceeding the donation, you agree with our Terms of Use and Privacy Policy.",
+                      style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: isTnCChecked ? () {} : null,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.darkBlue,
+                  foregroundColor: Colors.white,
+                  minimumSize: Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                child: Text("Continue", style: TextStyle(fontSize: 16)),
+              ),
+              SizedBox(height: 20),
             ],
           ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: isTnCChecked ? () {} : null, // Disabled if not checked
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.darkBlue,
-              foregroundColor: Colors.white,
-              minimumSize: Size(double.infinity, 50),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            ),
-            child: Text("Continue", style: TextStyle(fontSize: 16)),
-          ),
-          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
-  Widget _buildPaymentMethodButton({
-    required Widget icon,
-    required String label,
-    required bool isSelected,
-    required VoidCallback onPressed,
-  }) {
-    return Expanded(
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: isSelected ? AppColors.darkBlue : AppColors.lightGrey,
-          foregroundColor: isSelected ? Colors.white : Colors.black,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: EdgeInsets.symmetric(vertical: 25),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            icon,
-            SizedBox(width: 12),
-            Text(label, style: TextStyle(fontSize: 18)),
-          ],
-        ),
+Widget _buildPaymentMethodButton({
+  required Widget icon,
+  required String label,
+  required bool isSelected,
+  required VoidCallback onPressed,
+}) {
+  return Expanded(
+    child: ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: isSelected ? AppColors.darkBlue : AppColors.lightGrey,
+        foregroundColor: isSelected ? Colors.white : Colors.black,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        minimumSize: Size(0, 60), 
+        padding: EdgeInsets.symmetric(horizontal: 8),
       ),
-    );
-  }
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          icon,
+          SizedBox(width: 12),
+          Flexible(
+            child: Text(
+              label, 
+              style: TextStyle(fontSize: 14),
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
 
   Widget _buildCryptoForm() {
     return Column(

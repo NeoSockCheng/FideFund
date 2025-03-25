@@ -30,10 +30,10 @@ class _SplashScreenState extends State<SplashScreen>
       PageRouteBuilder(
         pageBuilder:
             (context, animation, secondaryAnimation) =>
-                const LoginPage(), // Target page
+                const LoginPage(), 
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           return FadeTransition(
-            opacity: animation, // Apply fade effect
+            opacity: animation, 
             child: child,
           );
         },
@@ -63,7 +63,7 @@ class _SplashScreenState extends State<SplashScreen>
               'assets/images/fidefund_logo.png',
               width: 500,
               height: 500,
-            ), // Ensure the image exists
+            ), 
             const Text(
               "Trust in Giving,\nJoy in Impact.",
               textAlign: TextAlign.center,

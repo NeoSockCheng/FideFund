@@ -13,7 +13,7 @@ class CharityCampaignCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 270,
+      height: 400,
       child: Card(
         color: AppColors.white,
         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
@@ -50,9 +50,7 @@ class CharityCampaignCard extends StatelessWidget {
                             campaign.status,
                             style: TextStyle(
                               fontSize: 14,
-                              color: _getStatusColor(
-                                campaign.status,
-                              ), // Text color based on status
+                              color: _getStatusColor(campaign.status),
                             ),
                           ),
                           backgroundColor: AppColors.white,
@@ -60,7 +58,7 @@ class CharityCampaignCard extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
                               color: _getStatusColor(campaign.status),
-                            ), // Border color
+                            ),
                           ),
                           labelPadding: const EdgeInsets.symmetric(
                             horizontal: 6,
@@ -103,7 +101,7 @@ class CharityCampaignCard extends StatelessWidget {
 
                     Text.rich(
                       TextSpan(
-                        text: "Raised from ", // Normal text
+                        text: "Raised from ",
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.normal,
@@ -111,16 +109,13 @@ class CharityCampaignCard extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text:
-                                "${campaign.donorCount}", // Contributors (Bold)
+                            text: "${campaign.donorCount}",
                             style: const TextStyle(
-                              fontWeight: FontWeight.bold, // Make it bold
-                              color: AppColors.grey, // Keep the same color
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.grey,
                             ),
                           ),
-                          TextSpan(
-                            text: " contributors", // Normal text
-                          ),
+                          TextSpan(text: " contributors"),
                         ],
                       ),
                     ),
@@ -151,7 +146,10 @@ class CharityCampaignCard extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    Row(
+                    // Buttons that can wrap to next line if needed
+                    Wrap(
+                      spacing: 5,
+                      runSpacing: 5,
                       children: [
                         // View Button
                         OutlinedButton.icon(
@@ -169,7 +167,7 @@ class CharityCampaignCard extends StatelessWidget {
                           icon: Image.asset(
                             'assets/icons/icon_view.png',
                             width: 30,
-                            height: 30,
+                            height: 20,
                           ),
                           label: const Text(
                             "View",
@@ -179,21 +177,15 @@ class CharityCampaignCard extends StatelessWidget {
                             ),
                           ),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: AppColors.darkBlue,
-                            ), // Border color
+                            side: const BorderSide(color: AppColors.darkBlue),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              // vertical: 10,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                           ),
                         ),
-                        const SizedBox(width: 15),
 
-                        //impact report button
+                        // Impact Report Button
                         OutlinedButton.icon(
                           onPressed: () {
                             Navigator.push(
@@ -209,23 +201,18 @@ class CharityCampaignCard extends StatelessWidget {
                             height: 30,
                           ),
                           label: const Text(
-                            "Create Impact Report",
+                            "Impact Report",
                             style: TextStyle(
                               color: AppColors.darkBlue,
                               fontWeight: FontWeight.normal,
                             ),
                           ),
                           style: OutlinedButton.styleFrom(
-                            side: const BorderSide(
-                              color: AppColors.darkBlue,
-                            ), // Border color
+                            side: const BorderSide(color: AppColors.darkBlue),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 10,
-                              // vertical: 10,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                           ),
                         ),
                       ],
@@ -244,7 +231,7 @@ class CharityCampaignCard extends StatelessWidget {
               child: Image.asset(
                 campaign.coverImage,
                 width: 100,
-                height: 250,
+                height: 350,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -270,9 +257,9 @@ class CharityCampaignCard extends StatelessWidget {
       case 'completed':
         return AppColors.babyBlue;
       case 'pending':
-        return AppColors.orange; // Define this color in AppColors
+        return AppColors.orange;
       default:
-        return Colors.grey; // Fallback color
+        return Colors.grey;
     }
   }
 }

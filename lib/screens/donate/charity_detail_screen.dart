@@ -11,7 +11,6 @@ class CharityDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // xxcontroller.method(parameter)
     final Charity charity = CharityController.getCharityById("charity_1");
     final Campaign campaign = CampaignController.getCampaignById("1");
 
@@ -28,8 +27,8 @@ class CharityDetailPage extends StatelessWidget {
             "Charity Details",
             style: TextStyle(
               color: AppColors.darkBlue,
-              fontSize: 20, // Adjust text size
-              fontWeight: FontWeight.bold, // Adjust font weight
+              fontSize: 20, 
+              fontWeight: FontWeight.bold, 
             ),
           ),
         ),
@@ -100,19 +99,19 @@ class CharityDetailPage extends StatelessWidget {
 
             Column(
               crossAxisAlignment:
-                  CrossAxisAlignment.start, // Aligns title to the left
+                  CrossAxisAlignment.start, 
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
                     //left: 8.0,
                     bottom: 8.0,
-                  ), // Adjust spacing
+                  ),
                   child: Text(
                     "Top Contributor",
                     style: TextStyle(
-                      fontSize: 18, // Adjust size
+                      fontSize: 18, 
                       fontWeight: FontWeight.bold,
-                      color: AppColors.black, // Adjust color if needed
+                      color: AppColors.black,
                     ),
                   ),
                 ),
@@ -121,7 +120,7 @@ class CharityDetailPage extends StatelessWidget {
                   child: Row(
                     mainAxisSize:
                         MainAxisSize
-                            .min, // Ensures it takes only necessary space
+                            .min, 
                     children: List.generate(
                       5,
                       (index) => Padding(
@@ -131,12 +130,12 @@ class CharityDetailPage extends StatelessWidget {
                           bottom: 20,
                         ),
                         child: CircleAvatar(
-                          radius: 28, // Adjust size
+                          radius: 28, 
                           backgroundImage: AssetImage(
                             "assets/images/charity_profile/contributor_${index + 1}.jpg",
                           ),
                           backgroundColor:
-                              AppColors.grey, // Fallback color if no image
+                              AppColors.grey, 
                         ),
                       ),
                     ),

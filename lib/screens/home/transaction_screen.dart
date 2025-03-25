@@ -43,7 +43,7 @@ class TransactionPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${totalAmount.toStringAsFixed(2)} MYR", // Dynamically calculated amount
+                  "${totalAmount.toStringAsFixed(2)} MYR", 
                   style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 ),
                 const Text(
@@ -114,46 +114,70 @@ class TransactionPage extends StatelessWidget {
   Widget _buildTransactionItem(Transaction transaction) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 25),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Row(
             children: [
-              CircleAvatar(
-                backgroundColor: Colors.white,
-                child: const Icon(Icons.school, color: Colors.black),
-              ),
-              const SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    transaction.campaignTitle, 
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    DateFormat("dd MMM yyyy").format(transaction.createdAt),
-                    style: const TextStyle(fontSize: 12, color: Colors.black54),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                "${transaction.amountMYR.toStringAsFixed(2)} MYR",
-                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-              ),
-              if (transaction.amountCrypto != null)
-                Text(
-                  "≈ ${transaction.amountCrypto!.toStringAsFixed(6)} ${transaction.Cryptocurrency}",
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+              Expanded(
+                flex: 2,
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: const Icon(Icons.school, color: Colors.black),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            transaction.campaignTitle, 
+                            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                          Text(
+                            DateFormat("dd MMM yyyy").format(transaction.createdAt),
+                            style: const TextStyle(fontSize: 12, color: Colors.black54),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+              ),
+              
+              Expanded(
+                flex: 1, 
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        "${transaction.amountMYR.toStringAsFixed(2)} MYR",
+                        style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                      ),
+                    ),
+                    if (transaction.amountCrypto != null)
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          "≈ ${transaction.amountCrypto!.toStringAsFixed(6)} ${transaction.Cryptocurrency}",
+                          style: const TextStyle(fontSize: 12, color: Colors.black54),
+                          maxLines: 1,
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ],
-          ),
-        ],
+          );
+        },
       ),
     );
   }

@@ -7,6 +7,7 @@ class AppTheme {
   static ThemeData theme = ThemeData(
     primaryColor: AppColors.primaryBlue,
     scaffoldBackgroundColor: AppColors.white,
+    fontFamily: AppTypography.fontFamily,
     textTheme: TextTheme(
       headlineLarge: AppTypography.heading1,
       headlineMedium: AppTypography.heading2,

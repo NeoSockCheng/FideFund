@@ -11,7 +11,6 @@ class CharityUpdateProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // xxcontroller.method(parameter)
     final Charity charity = CharityController.getCharityById("charity_1");
     final Campaign campaign = CampaignController.getCampaignById("1");
 
@@ -28,8 +27,8 @@ class CharityUpdateProfilePage extends StatelessWidget {
             "Update Profile",
             style: TextStyle(
               color: AppColors.darkBlue,
-              fontSize: 20, // Adjust text size
-              fontWeight: FontWeight.bold, // Adjust font weight
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -43,119 +42,143 @@ class CharityUpdateProfilePage extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Charity Name
-            Text(
-              charity.name,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-
-            // Charity Image
-            ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                campaign.coverImage,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Existing code remains the same...
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  charity.name,
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            SizedBox(height: 20),
+              SizedBox(height: 10),
 
-            // About Section
-            Text(
-              "About us",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 5),
-            Text(charity.about),
-            SizedBox(height: 20),
-
-            // Reach Out Section
-            Text(
-              "Reach Out to Us",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            Row(
-              children: [
-                Icon(Icons.email),
-                SizedBox(width: 10),
-                Text(charity.email),
-              ],
-            ),
-            SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(Icons.language),
-                SizedBox(width: 10),
-                Text(charity.website ?? "No website available"),
-              ],
-            ),
-            SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(Icons.phone),
-                SizedBox(width: 10),
-                Text(charity.phone),
-              ],
-            ),
-            SizedBox(height: 20),
-
-            Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start, // Aligns title to the left
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    //left: 8.0,
-                    bottom: 8.0,
-                  ), // Adjust spacing
-                  child: Text(
-                    "Top Contributor",
-                    style: TextStyle(
-                      fontSize: 18, // Adjust size
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.black, // Adjust color if needed
-                    ),
+              // Charity Image
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    campaign.coverImage,
+                    height: 200,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
                   ),
                 ),
-                Center(
-                  // Centers the row of avatars
+              ),
+              SizedBox(height: 20),
+
+              // About Section
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  "About us",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(height: 5),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(charity.about),
+              ),
+              SizedBox(height: 20),
+
+              // Reach Out Section
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  "Reach Out to Us",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Icon(Icons.email),
+                    SizedBox(width: 10),
+                    Text(charity.email),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Icon(Icons.language),
+                    SizedBox(width: 10),
+                    Text(charity.website ?? "No website available"),
+                  ],
+                ),
+              ),
+              SizedBox(height: 5),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    Icon(Icons.phone),
+                    SizedBox(width: 10),
+                    Text(charity.phone),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: const Text(
+                  "Top Contributor",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
-                    mainAxisSize:
-                        MainAxisSize
-                            .min, // Ensures it takes only necessary space
                     children: List.generate(
                       5,
                       (index) => Padding(
-                        padding: const EdgeInsets.only(
-                          right: 20,
-                          top: 10,
-                          bottom: 20,
-                        ),
+                        padding: const EdgeInsets.only(right: 20),
                         child: CircleAvatar(
-                          radius: 28, // Adjust size
+                          radius: 28,
                           backgroundImage: AssetImage(
                             "assets/images/charity_profile/contributor_${index + 1}.jpg",
                           ),
-                          backgroundColor:
-                              AppColors.grey, // Fallback color if no image
+                          backgroundColor: AppColors.grey,
                         ),
                       ),
                     ),
                   ),
                 ),
-              ],
-            ),
-
-            // Display the CampaignCard for a single campaign
-            CharityCampaignCard(campaign: campaign),
-          ],
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: const Text(
+                  "Active Campaigns",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  ),
+                ),
+              ),
+              // Display the CampaignCard without extra padding
+              CharityCampaignCard(campaign: campaign),
+            ],
+          ),
         ),
       ),
     );

@@ -20,11 +20,8 @@ class CharityPaymentReleasePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,        
-      ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -96,7 +93,7 @@ class CharityPaymentReleasePage extends StatelessWidget {
           Row(
             children: [
               CircleAvatar(
-                backgroundImage: NetworkImage(payment.campaignImage),
+                backgroundImage: AssetImage(payment.campaignImage),
                 radius: 20,
               ),
               const SizedBox(width: 10),

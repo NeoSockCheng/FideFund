@@ -1,3 +1,4 @@
+import 'package:fidefund/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
@@ -23,16 +24,13 @@ class FundAllocationPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.primaryBlue,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.pop(context),
-        ),
+      appBar: CustomAppBar(
+        title: "Fund Allocation",
+        backgroundColor: AppColors.primaryBlue,
+        showBackButton: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 35),
+        padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -95,6 +95,7 @@ class _DonationBubbleListState extends State<DonationBubbleList> {
         height: widget.height,
         child: AnimatedList(
           key: _listKey,
+          physics: NeverScrollableScrollPhysics(),
           padding: const EdgeInsets.only(top: 12, bottom: 8),
           initialItemCount: _donation.length,
           itemBuilder: (context, index, animation) {

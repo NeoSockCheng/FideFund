@@ -12,7 +12,7 @@ class CreateImpactReportPage extends StatefulWidget {
 }
 
 class _CreateImpactReportPageState extends State<CreateImpactReportPage> {
-  int _selectedMilestone = 1; // Default selected milestone
+  int _selectedMilestone = 1; 
   final _formKey = GlobalKey<FormState>();
   bool isCreating = true;
   Map<String, String?> uploadedFiles = {};
@@ -39,12 +39,11 @@ class _CreateImpactReportPageState extends State<CreateImpactReportPage> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: AppColors.black, // Adjust color if needed
+            color: AppColors.black, 
           ),
         ),
         backgroundColor: AppColors.white,
         elevation: 0,
-        //centerTitle: true, // Optional: Centers the title
       ),
 
       body: SingleChildScrollView(
@@ -179,16 +178,15 @@ class _CreateImpactReportPageState extends State<CreateImpactReportPage> {
     );
   }
 
-  // Function to build a large text input field
   Widget buildLargeInputField() {
     return TextFormField(
-      maxLines: 5, // Adjust the number of lines
+      maxLines: 5, 
       decoration: InputDecoration(
         filled: true,
         fillColor: AppColors.secondaryBlue,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide.none, // Remove default border
+          borderSide: BorderSide.none, 
         ),
         hintText: "Enter details here...",
         contentPadding: EdgeInsets.all(12),
@@ -213,9 +211,9 @@ class _CreateImpactReportPageState extends State<CreateImpactReportPage> {
             border: Border.all(
               color: AppColors.secondaryBlue,
               width: 1.5,
-            ), // Border color updated
+            ), 
             borderRadius: BorderRadius.circular(10),
-            color: AppColors.secondaryBlue, // Background color updated
+            color: AppColors.secondaryBlue, 
           ),
           child: Row(
             children: [
@@ -241,13 +239,13 @@ class _CreateImpactReportPageState extends State<CreateImpactReportPage> {
 
     showDialog(
       context: context,
-      barrierDismissible: false, // Prevent dismissing dialog
+      barrierDismissible: false, 
       builder: (context) {
         return StatefulBuilder(
           builder: (context, setState) {
             Future.delayed(Duration(seconds: 2), () {
               setState(() {
-                isCreating = false; // Change state after delay
+                isCreating = false; 
               });
             });
 

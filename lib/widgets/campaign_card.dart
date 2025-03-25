@@ -1,6 +1,6 @@
 import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/theme/colors.dart';
-import 'package:fidefund/screens/donate/campaign_details_screen.dart'; // Import the details page
+import 'package:fidefund/screens/donate/campaign_details_screen.dart'; 
 import 'package:flutter/material.dart';
 
 class CampaignCard extends StatelessWidget {
@@ -66,29 +66,29 @@ class CampaignCard extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const Spacer(),
-                          Chip(
-                            label: Text(
-                              campaign.category,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: AppColors.darkBlue,
-                              ),
-                            ),
-                            backgroundColor: AppColors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              side: const BorderSide(color: AppColors.darkBlue),
-                            ),
-                            labelPadding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 0,
-                            ),
-                          ),
+                          
                         ],
                       ),
+                      Chip(
+                        label: Text(
+                          campaign.category,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: AppColors.darkBlue,
+                          ),
+                        ),
+                        backgroundColor: AppColors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          side: const BorderSide(color: AppColors.darkBlue),
+                        ),
+                        labelPadding: const EdgeInsets.symmetric(
+                          horizontal: 6,
+                          vertical: 0,
+                        ),
+                      ),
 
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 4),
                       Text(
                         campaign.description,
                         maxLines: 3,

@@ -1,5 +1,6 @@
 import 'package:fidefund/controllers/charity_controller.dart';
 import 'package:fidefund/controllers/donor_controller.dart';
+import 'package:fidefund/models/campaign_model.dart';
 import 'package:fidefund/models/donation_model.dart';
 import 'package:fidefund/theme/colors.dart';
 import 'package:fidefund/utils/app_images.dart';
@@ -29,30 +30,31 @@ class RealTimeAllDonationsItem extends StatelessWidget {
       child: Column(
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CustomCircularAvatar(radius: 20, imagePath: donorImage),
-              const SizedBox(width: 14),
+              const SizedBox(width: 15),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     RichText(
                       text: TextSpan(
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                          color: AppColors.white,
-                        ),
                         children: [
                           TextSpan(
                             text: "$donorUsername ",
                             style: const TextStyle(
                               fontWeight: FontWeight.normal,
+                              color: AppColors.white,
                             ),
                           ),
                           const TextSpan(
                             text: "donated ",
-                            style: const TextStyle(fontWeight: FontWeight.w100),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.normal, 
+                              color: AppColors.secondaryBlue,
+                            ),
                           ),
                           TextSpan(
                             text: "${donations.amount} ",
@@ -68,7 +70,10 @@ class RealTimeAllDonationsItem extends StatelessWidget {
                           ),
                           const TextSpan(
                             text: "to ",
-                            style: const TextStyle(fontWeight: FontWeight.w200),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: AppColors.secondaryBlue
+                            ),
                           ),
                           TextSpan(
                             text: "$charityName",
@@ -85,11 +90,11 @@ class RealTimeAllDonationsItem extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          "${donations.createdAt}",
+                          "${donations.createdAt.year}/${donations.createdAt.month.toString().padLeft(2, '0')}/${donations.createdAt.day.toString().padLeft(2, '0')} ${donations.createdAt.hour.toString().padLeft(2, '0')}:${donations.createdAt.minute.toString().padLeft(2, '0')}",
                           style: const TextStyle(
-                            fontSize: 10,
-                            color: AppColors.lightGrey,
-                            fontWeight: FontWeight.w200,
+                            fontSize: 12,
+                            color: AppColors.secondaryBlue,
+                            fontWeight: FontWeight.normal,
                           ),
                         ),
                         const Spacer(),
@@ -104,7 +109,7 @@ class RealTimeAllDonationsItem extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 30),
+              const SizedBox(width: 15),
               CustomCircularAvatar(radius: 20, imagePath: charityImage),
             ],
           ),
