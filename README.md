@@ -1,47 +1,54 @@
-# fidefund
+# FideFund, A Blockchain-Based Charity Donation Platform
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+This is a blockchain-based charity donation platform designed to provide transparency, security, and engagement in charitable giving. The platform allows users to donate using cryptocurrency or MYR, track fund usage in real-time, and ensures funds are properly utilized through milestone-based releases. The platform also includes a gamified leaderboard to boost user engagement and a charity admin management portal.
 
 
-Hello
-To start running project, if you are using VSCode, open terminal and run:
-flutter clean
+
+## Key Features
+
+Blockchain-Based Donations: Secure and transparent donations using cryptocurrency or MYR.
+
+Real-Time Tracking: Ensure fund safety with live tracking of donation usage.
+
+Milestone-Based Fund Release: Release funds in stages based on milestone achievements to guarantee proper usage.
+
+Gamification Leaderboard: Enhance user engagement by ranking top contributors.
+
+Charity Admin Management Portal: Manage charity profiles, campaigns, and user interactions.
+
+## Tech Stack
+
+Frontend: Flutter (for prototyping and UI/UX development)
+
+Authentication: Firebase (for secure user authentication)
+
+Database: MongoDB (for storing and managing platform data)
+
+AI Technologies: To enhance user insights and platform intelligence
+
+
+
+### Prerequisites
+
+Ensure you have the following installed on your system:
+
+Flutter SDK: Install Flutter
+
+Dart: Comes bundled with Flutter
+
+IDE (e.g., VSCode, Android Studio)
+
+### Getting Started
+
+Install dependencies:
+
 flutter pub get
+
+Run the application:
+
 flutter run
-if you are using Android Studio, then use VSCode la.
+
+Ensure you have an emulator or physical device connected for Flutter to deploy the app.
 
 
-Project Struture:
-- assets folder consist of icons, images, fonts. Just put them in the folder you want
-- lib folder consist of all the source code of the project
-- we will mainly develop our frontend in lib/screens at respective folder (eg: lib/screens/donate/donate_screen.dart)
-- lib/theme contain the app colors, font to reduce hardcoded color value and font type
-( there is also spacing.dart, but i think can skip because most of our spacing are different values)
 
-
-How to use app colors:
-color: AppColors.primaryBlue;
-
-
-How to use font type:
-text = AppTypography.textStyle(fontSize: 12, fontWeight: light, fontStyle: FontStyle.italic, color: AppColors.grey);text = AppTypography.bodyLarge;
-
-
-If you see this error, just ignore it:
-Building with plugins requires symlink support.
-Please enable Developer Mode in your system settings. Run
-  start ms-settings:developers
-to open settings.
