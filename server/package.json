@@ -16,6 +16,8 @@
     "@typechain/ethers-v6": "^0.5.1",
     "@typechain/hardhat": "^9.1.0",
     "@types/chai": "^4.3.20",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.1",
     "@types/fs-extra": "^11.0.4",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.17.30",
@@ -41,7 +43,7 @@
     "ts-generator": "^0.1.1",
     "ts-node": "^10.9.2",
     "typechain": "^8.3.2",
-    "typescript": "^5.3.3"
+    "typescript": "^5.8.3"
   },
   "files": [
     "contracts"
@@ -75,5 +77,12 @@
     "task:withdraw": "hardhat task:withdraw",
     "test": "hardhat test",
     "typechain": "cross-env TS_NODE_TRANSPILE_ONLY=true hardhat typechain"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "joi": "^17.13.3",
+    "morgan": "^1.10.0"
   }
 }
